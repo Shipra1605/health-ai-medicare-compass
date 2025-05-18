@@ -110,16 +110,4 @@
   .medicare-input {
     @apply border-2 border-medicare-lightBlue/50 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-medicare-blue/50 bg-white/70 backdrop-blur-sm;
   }
-
-  .page-background {
-    @apply fixed inset-0 w-full h-full -z-10 bg-cover bg-center bg-no-repeat;
-  }
-  
-  .page-overlay {
-    @apply fixed inset-0 bg-gradient-to-br from-medicare-darkBlue/40 to-black/30 backdrop-blur-sm -z-10;
-  }
-
-  .animate-shine {
-    @apply bg-gradient-to-r from-transparent via-white/20 to-transparent bg-[length:400%_100%] animate-background-shine;
-  }
 }
