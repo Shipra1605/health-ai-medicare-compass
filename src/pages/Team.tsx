@@ -86,31 +86,21 @@ const Team = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {teamMembers.map((member, index) => (
-            <div key={index} className="flex flex-col medicare-card hover:-translate-y-1 transition-all duration-300">
+            <div key={index} className="flex flex-col medicare-card hover:-translate-y-1 transition-all duration-300 overflow-hidden">
               <div className="h-64 overflow-hidden rounded-t-lg">
                 <img 
                   src={member.imageUrl} 
                   alt={member.name} 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
                 />
               </div>
-              <div className="p-6 flex-grow">
+              <div className="p-6 flex-grow bg-white/90 backdrop-blur-md">
                 <h3 className="text-xl font-bold text-medicare-darkBlue">{member.name}</h3>
                 <p className="text-medicare-blue font-medium mb-3">{member.role}</p>
                 <p className="text-gray-600">{member.bio}</p>
               </div>
             </div>
           ))}
-        </div>
-        
-        <div className="mt-20 text-center">
-          <h2 className="text-2xl font-bold text-white mb-6">Join Our Team</h2>
-          <p className="text-white/90 mb-8 max-w-2xl mx-auto">
-            We're always looking for talented individuals who are passionate about using AI to transform healthcare.
-          </p>
-          <Button className="medicare-button">
-            View Career Opportunities
-          </Button>
         </div>
       </div>
 
