@@ -5,59 +5,80 @@ import PageLayout from '@/components/PageLayout';
 import MedicareLogo from '@/components/MedicareLogo';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 
 const Login = () => {
   return (
     <PageLayout backgroundImage="medical-tech">
-      <div className="min-h-screen flex items-center justify-center p-6">
-        <Card className="max-w-md w-full glassmorphism">
-          <CardHeader className="space-y-1 text-center">
-            <MedicareLogo className="mx-auto mb-4" />
-            <CardTitle className="text-2xl text-medicare-darkBlue">Welcome back</CardTitle>
-            <CardDescription>Enter your credentials to access your account</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium text-gray-700">
+      {/* Header/Navigation */}
+      <header className="w-full py-4 px-6 bg-white/80 backdrop-blur-sm">
+        <div className="container mx-auto flex justify-between items-center">
+          <MedicareLogo />
+          
+          <Link to="/" className="medicare-button-outline">
+            Homepage
+          </Link>
+        </div>
+      </header>
+
+      {/* Login Form */}
+      <div className="container mx-auto px-6 py-12 flex justify-center items-center min-h-[80vh]">
+        <div className="w-full max-w-md bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-8">
+          <div className="flex justify-center mb-6">
+            <MedicareLogo />
+          </div>
+          
+          <h1 className="text-2xl font-bold text-center text-medicare-darkBlue mb-6">MediCare AI</h1>
+          
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                 Email
               </label>
               <Input
-                id="email"
-                placeholder="name@example.com"
-                required
                 type="email"
+                id="email"
+                placeholder="you@example.com"
                 className="medicare-input"
               />
             </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <label htmlFor="password" className="text-sm font-medium text-gray-700">
-                  Password
-                </label>
-                <Link to="/forgot-password" className="text-sm text-medicare-blue hover:underline">
-                  Forgot password?
-                </Link>
-              </div>
+            
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                Password
+              </label>
               <Input
-                id="password"
-                required
                 type="password"
+                id="password"
                 className="medicare-input"
               />
             </div>
-            <Button className="w-full medicare-button">Sign In</Button>
-          </CardContent>
-          <CardFooter className="text-center">
-            <p className="text-sm text-gray-600 w-full">
+            
+            <Button className="w-full medicare-button">
+              Sign In
+            </Button>
+            
+            <div className="text-center text-sm text-gray-600">
               Don't have an account?{" "}
               <Link to="/signup" className="text-medicare-blue hover:underline">
                 Sign up
               </Link>
-            </p>
-          </CardFooter>
-        </Card>
+            </div>
+          </div>
+        </div>
       </div>
+      
+      {/* Footer */}
+      <footer className="bg-medicare-darkBlue text-white py-4 mt-auto">
+        <div className="container mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center">
+            <MedicareLogo className="text-white" />
+            <span className="ml-2 text-sm text-white/70">© {new Date().getFullYear()}</span>
+          </div>
+          <div className="text-sm text-white/70">
+            Your trusted AI healthcare companion.
+          </div>
+        </div>
+      </footer>
     </PageLayout>
   );
 };

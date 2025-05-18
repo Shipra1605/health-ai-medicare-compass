@@ -18,10 +18,18 @@ const NotFound = () => {
 
   return (
     <PageLayout backgroundImage="blue-wave">
+      <header className="w-full py-4 px-6 bg-white/80 backdrop-blur-sm">
+        <div className="container mx-auto flex justify-between items-center">
+          <MedicareLogo />
+          
+          <Link to="/" className="medicare-button-outline">
+            Homepage
+          </Link>
+        </div>
+      </header>
+
       <div className="min-h-screen w-full flex flex-col items-center justify-center p-6">
         <div className="medicare-card max-w-md w-full text-center p-8">
-          <MedicareLogo className="mx-auto mb-6" />
-          
           <h1 className="text-6xl font-bold text-medicare-blue mb-2">404</h1>
           <p className="text-2xl text-medicare-darkBlue mb-6">Oops! Page not found</p>
           <p className="text-gray-600 mb-8">

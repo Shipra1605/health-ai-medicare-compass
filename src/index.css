@@ -95,19 +95,55 @@
 }
 
 @layer components {
-  .glassmorphism {
-    @apply bg-white/60 backdrop-blur-md border border-white/20 shadow-lg;
-  }
-
+  /* Card styles */
   .medicare-card {
-    @apply bg-white/80 backdrop-blur-sm border border-medicare-lightBlue/30 rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-300;
+    @apply bg-white/90 backdrop-blur-sm rounded-lg shadow-md p-6 transition-all duration-300;
   }
   
+  /* Button styles */
   .medicare-button {
-    @apply bg-gradient-to-r from-medicare-blue to-medicare-cyan text-white font-medium rounded-md px-4 py-2 hover:opacity-90 transition-all duration-200 shadow-md hover:shadow-lg;
+    @apply bg-medicare-blue text-white font-medium rounded-md px-4 py-2 hover:bg-medicare-blue/90 transition-all duration-200 shadow-sm flex items-center justify-center gap-2;
   }
 
+  .medicare-button-outline {
+    @apply border border-medicare-blue text-medicare-blue font-medium rounded-md px-4 py-2 hover:bg-medicare-blue hover:text-white transition-all duration-200 flex items-center justify-center gap-2;
+  }
+
+  /* Input styles */
   .medicare-input {
-    @apply border-2 border-medicare-lightBlue/50 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-medicare-blue/50 bg-white/70 backdrop-blur-sm;
+    @apply border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-medicare-blue/50 focus:border-medicare-blue/50 bg-white w-full;
+  }
+
+  /* Header styles */
+  .header-container {
+    @apply w-full py-3 px-6 bg-white/80 backdrop-blur-sm shadow-sm;
+  }
+
+  /* Section styles */
+  .section-container {
+    @apply container mx-auto px-4 py-6;
+  }
+
+  /* Heading styles */
+  .heading-primary {
+    @apply text-2xl md:text-3xl font-bold text-medicare-darkBlue mb-4;
+  }
+
+  .heading-secondary {
+    @apply text-xl md:text-2xl font-semibold text-medicare-darkBlue mb-3;
+  }
+
+  /* Tab styles */
+  .tab-button {
+    @apply px-4 py-2 text-gray-600 rounded-t-lg hover:text-medicare-blue;
+  }
+
+  .tab-button-active {
+    @apply px-4 py-2 text-medicare-blue bg-white/80 rounded-t-lg border-b-2 border-medicare-blue font-medium;
+  }
+
+  /* Content container */
+  .content-container {
+    @apply bg-white/90 backdrop-blur-sm rounded-lg shadow-md p-6 mb-6;
   }
 }
