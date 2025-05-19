@@ -97,12 +97,12 @@
 @layer components {
   /* Enhanced Glassmorphism Card styles */
   .medicare-card {
-    @apply bg-white/30 backdrop-blur-md rounded-lg shadow-md p-6 transition-all duration-300 border border-white/30;
+    @apply bg-white/40 backdrop-blur-md rounded-lg shadow-md p-6 transition-all duration-300 border border-white/30;
   }
   
-  /* Enhanced Glass card effect with proper transparency for background visibility */
+  /* Enhanced Glass card effect with more transparency */
   .glass-card {
-    @apply bg-white/20 backdrop-blur-md border border-white/30 shadow-lg rounded-lg p-6;
+    @apply bg-white/30 backdrop-blur-md border border-white/30 shadow-lg rounded-lg;
   }
   
   /* Button styles with 3D effect */
@@ -121,12 +121,12 @@
 
   /* Input styles */
   .medicare-input {
-    @apply border border-white/30 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-medicare-blue/50 focus:border-medicare-blue/50 bg-white/40 w-full;
+    @apply border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-medicare-blue/50 focus:border-medicare-blue/50 bg-white/70 w-full;
   }
 
   /* Header styles with enhanced glassmorphism */
   .header-container {
-    @apply w-full py-3 px-6 bg-white/20 backdrop-blur-md shadow-sm border-b border-white/30;
+    @apply w-full py-3 px-6 bg-white/50 backdrop-blur-md shadow-sm border-b border-white/30;
   }
 
   /* Section styles */
@@ -157,7 +157,7 @@
 
   /* Content container with improved glassmorphism */
   .content-container {
-    @apply bg-white/20 backdrop-blur-md rounded-lg shadow-md p-6 mb-6 border border-white/30;
+    @apply bg-white/40 backdrop-blur-md rounded-lg shadow-md p-6 mb-6 border border-white/30;
   }
 
   /* Enhanced 3D and Glass Effects */
