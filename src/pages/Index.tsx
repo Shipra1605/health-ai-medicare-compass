@@ -26,12 +26,12 @@ const Index = () => {
 
   const aiModels = [
     {
-      icon: "🧠",
+      icon: "🔬",
       title: "Clinical BERT",
       description: "Our specialized NLP model processes medical terminology to understand complex symptoms."
     },
     {
-      icon: "📊",
+      icon: "🌲",
       title: "XGBoost",
       description: "Our decision tree algorithm analyzes health data to identify patterns and predict optimal treatments."
     },
@@ -69,7 +69,7 @@ const Index = () => {
 
       {/* Hero Section */}
       <div className="container mx-auto px-6 py-12">
-        <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-md p-8 max-w-3xl mx-auto text-center">
+        <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-md p-8 max-w-3xl mx-auto text-center animate-fade-in-up">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
             Welcome to Your Personal <span className="text-medicare-blue">AI</span> <span className="text-purple-500">Doctor</span>
           </h1>
@@ -78,12 +78,12 @@ const Index = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link to="/signup" className="w-full sm:w-auto">
-              <Button className="w-full medicare-button">
+              <Button className="w-full medicare-button transform hover:scale-105 transition-transform">
                 Create New Account
               </Button>
             </Link>
             <Link to="/login" className="w-full sm:w-auto">
-              <Button variant="outline" className="w-full medicare-button-outline">
+              <Button variant="outline" className="w-full medicare-button-outline transform hover:scale-105 transition-transform">
                 Existing User Login
               </Button>
             </Link>
@@ -97,12 +97,15 @@ const Index = () => {
 
       {/* Services Section */}
       <div className="container mx-auto px-6 py-12">
-        <h2 className="text-2xl font-bold text-center mb-8">Our Services</h2>
+        <h2 className="text-2xl font-bold text-center mb-8 text-medicare-darkBlue">Our Services</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {services.map((service, index) => (
-            <div key={index} className="medicare-card">
+            <div 
+              key={index} 
+              className="medicare-card hover:shadow-lg transform hover:scale-[1.03] transition-all"
+            >
               <div className="text-4xl mb-4">{service.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+              <h3 className="text-xl font-semibold mb-2 text-medicare-darkBlue">{service.title}</h3>
               <p className="text-gray-600">{service.description}</p>
             </div>
           ))}
@@ -112,16 +115,20 @@ const Index = () => {
       {/* AI Models Section */}
       <div className="container mx-auto px-6 py-12 mb-12">
         <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-md p-8">
-          <h2 className="text-2xl font-bold text-center mb-8">Powered By Advanced AI</h2>
+          <h2 className="text-2xl font-bold text-center mb-8 text-medicare-darkBlue">Powered By Advanced AI</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {aiModels.map((model, index) => (
-              <div key={index} className="p-6 rounded-lg text-center" style={{
-                backgroundColor: index === 0 ? 'rgba(240, 249, 255, 0.8)' : 
-                                 index === 1 ? 'rgba(240, 255, 240, 0.8)' : 
-                                 'rgba(250, 240, 255, 0.8)'
-              }}>
+              <div 
+                key={index} 
+                className="p-6 rounded-lg text-center transform hover:scale-[1.03] transition-transform" 
+                style={{
+                  backgroundColor: index === 0 ? 'rgba(240, 249, 255, 0.8)' : 
+                                index === 1 ? 'rgba(240, 255, 240, 0.8)' : 
+                                'rgba(250, 240, 255, 0.8)'
+                }}
+              >
                 <div className="text-4xl mb-4">{model.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{model.title}</h3>
+                <h3 className="text-xl font-semibold mb-2 text-medicare-darkBlue">{model.title}</h3>
                 <p className="text-gray-600 text-sm">{model.description}</p>
               </div>
             ))}
@@ -129,7 +136,7 @@ const Index = () => {
         </div>
       </div>
       
-      {/* Simple Footer */}
+      {/* Footer */}
       <footer className="bg-medicare-darkBlue text-white py-4 mt-auto">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center">
@@ -137,7 +144,7 @@ const Index = () => {
             <span className="ml-2 text-sm text-white/70">© {new Date().getFullYear()}</span>
           </div>
           <div className="text-sm text-white/70">
-            Your trusted AI healthcare companion.
+            Your trusted Medicare AI healthcare companion.
           </div>
         </div>
       </footer>

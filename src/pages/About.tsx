@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PageLayout from '@/components/PageLayout';
 import MedicareLogo from '@/components/MedicareLogo';
-import { Button } from '@/components/ui/button';
 
 const About = () => {
   const objectives = [
@@ -53,7 +52,7 @@ const About = () => {
   ];
 
   return (
-    <PageLayout backgroundImage="ai-health">
+    <PageLayout backgroundImage="heart-hand">
       {/* Header/Navigation */}
       <header className="w-full py-4 px-6 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto flex justify-between items-center">
@@ -68,50 +67,38 @@ const About = () => {
       {/* Main Content */}
       <div className="container mx-auto px-6 py-12">
         <div className="medicare-card mb-10">
-          <h1 className="text-3xl font-bold text-center mb-8 border-b pb-4">About MediCare AI</h1>
+          <h1 className="text-3xl font-bold text-center mb-8 border-b pb-4 text-medicare-darkBlue">About MediCare AI</h1>
           
-          <div className="space-y-4 max-w-3xl mx-auto">
-            <p className="text-center">
-              MediCare AI harnesses cutting-edge ML and AI to deliver accurate medical recommendations in real-time.
+          <div className="space-y-6 max-w-3xl mx-auto">
+            <p className="text-gray-700">
+              MediCare AI harnesses cutting-edge ML and AI to deliver accurate medical recommendations in real-time. Our dual-model approach combines ClinicalBERT for natural language understanding with XGBoost for structured data analysis. We process both structured metrics and unstructured narratives to create comprehensive patient profiles.
             </p>
             
-            <p className="text-center">
-              Our dual-model approach combines ClinicalBERT for natural language understanding with XGBoost for structured data analysis.
-            </p>
-            
-            <p className="text-center">
-              We process both structured metrics and unstructured narratives to create comprehensive patient profiles.
-            </p>
-            
-            <p className="text-center">
-              SHAP values provide transparent explanations for every recommendation, ensuring trust and understanding.
-            </p>
-            
-            <p className="text-center">
-              Our personalized treatment plans consider medical history, symptoms, and genetic predispositions for optimal care.
+            <p className="text-gray-700">
+              SHAP values provide transparent explanations for every recommendation, ensuring trust and understanding. Our personalized treatment plans consider medical history, symptoms, and genetic predispositions for optimal care.
             </p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <div className="medicare-card">
+          <div className="medicare-card hover:shadow-lg transition-all transform hover:scale-[1.01]">
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 text-xl">
+              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 text-xl">
                 🧠
               </div>
-              <h2 className="text-xl font-semibold">AI-Powered Analysis</h2>
+              <h2 className="text-xl font-semibold text-medicare-darkBlue">AI-Powered Analysis</h2>
             </div>
             <p className="text-gray-700">
               MediCare AI integrates advanced machine learning models including ClinicalBERT for natural language processing of medical texts and XGBoost for classification of structured patient data. This dual approach enables a comprehensive analysis of both medical history narratives and specific health metrics.
             </p>
           </div>
 
-          <div className="medicare-card">
+          <div className="medicare-card hover:shadow-lg transition-all transform hover:scale-[1.01]">
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 text-xl">
+              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 text-xl">
                 💾
               </div>
-              <h2 className="text-xl font-semibold">Comprehensive Data Processing</h2>
+              <h2 className="text-xl font-semibold text-medicare-darkBlue">Comprehensive Data Processing</h2>
             </div>
             <p className="text-gray-700">
               Our system processes both structured and unstructured medical data, converting complex patient information into actionable insights. The platform handles everything from laboratory test results to doctor's notes, creating a holistic view of each patient's unique health profile.
@@ -121,12 +108,15 @@ const About = () => {
 
         {/* Objectives Section */}
         <div className="medicare-card mb-12">
-          <h2 className="text-2xl font-bold text-center mb-8">Our Objectives</h2>
+          <h2 className="text-2xl font-bold text-center mb-8 text-medicare-darkBlue">Our Objectives</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {objectives.map((objective, index) => (
-              <div key={index} className="p-4 border rounded-lg text-center hover:shadow-md transition-shadow">
+              <div 
+                key={index} 
+                className="p-4 border rounded-lg text-center hover:shadow-md transition-shadow transform hover:scale-[1.03] transition-transform"
+              >
                 <div className="text-4xl mb-3">{objective.icon}</div>
-                <h3 className="text-lg font-semibold mb-2">{objective.title}</h3>
+                <h3 className="text-lg font-semibold mb-2 text-medicare-darkBlue">{objective.title}</h3>
                 <p className="text-sm text-gray-600">{objective.description}</p>
               </div>
             ))}
@@ -135,10 +125,13 @@ const About = () => {
 
         {/* Technology Stack */}
         <div className="medicare-card">
-          <h2 className="text-2xl font-bold text-center mb-8">Technology Stack</h2>
+          <h2 className="text-2xl font-bold text-center mb-8 text-medicare-darkBlue">Technology Stack</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {techStack.map((tech, index) => (
-              <div key={index} className="p-4 bg-gray-50 rounded-lg">
+              <div 
+                key={index} 
+                className="p-4 bg-gray-50 rounded-lg hover:shadow-md transition-shadow transform hover:scale-[1.03] transition-transform"
+              >
                 <h3 className="font-semibold text-medicare-blue mb-2">{tech.category}</h3>
                 <p className="text-gray-700 text-sm">{tech.technologies}</p>
               </div>
@@ -155,7 +148,7 @@ const About = () => {
             <span className="ml-2 text-sm text-white/70">© {new Date().getFullYear()}</span>
           </div>
           <div className="text-sm text-white/70">
-            Your trusted AI healthcare companion.
+            Your trusted Medicare AI healthcare companion.
           </div>
         </div>
       </footer>

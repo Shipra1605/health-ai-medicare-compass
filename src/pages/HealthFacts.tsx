@@ -35,6 +35,31 @@ const HealthFacts = () => {
       icon: "🧘",
       title: "Meditation Changes Brain Structure",
       content: "Regular meditation practice can physically change your brain in as little as 8 weeks. MRI scans show increased gray matter density in brain regions associated with learning, memory, self-awareness, compassion, and introspection."
+    },
+    {
+      icon: "👁️",
+      title: "Blue Light Affects Eye Health",
+      content: "Prolonged exposure to blue light from digital screens can contribute to digital eye strain and may damage retinal cells. The 20-20-20 rule helps protect your eyes: every 20 minutes, look at something 20 feet away for at least 20 seconds."
+    },
+    {
+      icon: "🦴",
+      title: "Weight-Bearing Exercise Builds Bone Density",
+      content: "Activities like walking, running, and resistance training stimulate bone formation. People who regularly perform weight-bearing exercises have higher bone density and a lower risk of osteoporosis as they age."
+    },
+    {
+      icon: "🫁",
+      title: "Deep Breathing Reduces Stress",
+      content: "Slow, deep breathing activates your parasympathetic nervous system, which controls your body's rest and digest functions. Just 5 minutes of deep breathing can significantly reduce cortisol levels and blood pressure."
+    },
+    {
+      icon: "🍊",
+      title: "Vitamin C Boosts Collagen Production",
+      content: "Vitamin C is essential for the synthesis of collagen, a protein that provides structure to your skin, bones, and connective tissues. Without adequate vitamin C, collagen production decreases, which can lead to joint pain and skin problems."
+    },
+    {
+      icon: "🔆",
+      title: "Sunlight Regulates Sleep Patterns",
+      content: "Morning sunlight exposure helps regulate your circadian rhythm by suppressing melatonin production. Just 15-30 minutes of natural light exposure each morning can improve sleep quality and make it easier to wake up early."
     }
   ];
 
@@ -63,6 +88,31 @@ const HealthFacts = () => {
       icon: "🧠",
       title: "Practice Mindfulness Daily",
       content: "Spend at least 10 minutes each day in mindful practice. This could be meditation, deep breathing, or simply focusing on your present surroundings. Mindfulness reduces stress hormones, lowers inflammation, and improves emotional regulation."
+    },
+    {
+      icon: "🩺",
+      title: "Schedule Regular Health Check-ups",
+      content: "Don't wait until you're sick to see a doctor. Regular preventive check-ups can detect potential health issues before they become serious. Annual physicals, dental cleanings, and age-appropriate screenings are essential for long-term health."
+    },
+    {
+      icon: "☀️",
+      title: "Protect Your Skin",
+      content: "Apply broad-spectrum sunscreen with SPF 30+ daily, even on cloudy days. UV damage is cumulative and can lead to premature aging and skin cancer. Reapply every two hours when outdoors and wear protective clothing when possible."
+    },
+    {
+      icon: "🧪",
+      title: "Monitor Key Health Metrics",
+      content: "Keep track of vital health numbers like blood pressure, cholesterol, blood sugar, and body mass index. Understanding your baseline values helps you notice concerning changes and gives you concrete goals for improvement."
+    },
+    {
+      icon: "💊",
+      title: "Take Medications as Prescribed",
+      content: "Follow your doctor's instructions for all medications. Don't stop taking prescriptions without consulting your healthcare provider, even if symptoms improve. Use pill organizers or digital reminders to maintain consistency."
+    },
+    {
+      icon: "🧬",
+      title: "Know Your Family Health History",
+      content: "Create a detailed record of health conditions that run in your family. This information helps your healthcare providers assess your risk factors and recommend appropriate preventive measures or early screening tests."
     }
   ];
 
@@ -75,7 +125,7 @@ const HealthFacts = () => {
   };
 
   return (
-    <PageLayout backgroundImage="blue-wave">
+    <PageLayout backgroundImage="heartbeat">
       {/* Header/Navigation */}
       <header className="w-full py-4 px-6 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto flex justify-between items-center">
@@ -92,19 +142,19 @@ const HealthFacts = () => {
         <div className="medicare-card mb-10 text-center">
           <h1 className="text-3xl font-bold mb-4">Health Knowledge Center</h1>
           <p className="text-gray-700 mb-6">
-            Discover important health facts and prevention tips to help you make informed decisions about your wellbeing
+            Discover important health facts and prevention tips to help you improve your day-to-day wellbeing
           </p>
           
           {/* Tabs */}
           <div className="flex border-b mb-8 justify-center gap-4">
             <button 
-              className={activeTab === 'facts' ? 'tab-button-active' : 'tab-button'} 
+              className={activeTab === 'facts' ? 'tab-button-active transform hover:scale-105 transition-transform' : 'tab-button transform hover:scale-105 transition-transform'} 
               onClick={() => setActiveTab('facts')}
             >
               Health Facts
             </button>
             <button 
-              className={activeTab === 'tips' ? 'tab-button-active' : 'tab-button'} 
+              className={activeTab === 'tips' ? 'tab-button-active transform hover:scale-105 transition-transform' : 'tab-button transform hover:scale-105 transition-transform'} 
               onClick={() => setActiveTab('tips')}
             >
               Prevention Tips
@@ -115,13 +165,13 @@ const HealthFacts = () => {
           <div className="max-w-2xl mx-auto">
             {activeTab === 'facts' ? (
               <div className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full mx-auto flex items-center justify-center text-blue-500 text-2xl mb-4">
+                <div className="w-16 h-16 bg-blue-100 rounded-full mx-auto flex items-center justify-center text-blue-500 text-2xl mb-4 transform hover:scale-110 transition-transform">
                   {healthFacts[currentFact].icon}
                 </div>
-                <h2 className="text-xl font-semibold mb-4">{healthFacts[currentFact].title}</h2>
+                <h2 className="text-xl font-semibold mb-4 text-medicare-darkBlue">{healthFacts[currentFact].title}</h2>
                 <p className="text-gray-700 mb-8">{healthFacts[currentFact].content}</p>
                 <Button 
-                  className="medicare-button mx-auto"
+                  className="medicare-button mx-auto transform hover:scale-105 transition-transform"
                   onClick={handleNextFact}
                 >
                   Next Fact <span className="ml-2">→</span>
@@ -130,13 +180,13 @@ const HealthFacts = () => {
               </div>
             ) : (
               <div className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full mx-auto flex items-center justify-center text-blue-500 text-2xl mb-4">
+                <div className="w-16 h-16 bg-blue-100 rounded-full mx-auto flex items-center justify-center text-blue-500 text-2xl mb-4 transform hover:scale-110 transition-transform">
                   {preventionTips[currentTip].icon}
                 </div>
-                <h2 className="text-xl font-semibold mb-4">{preventionTips[currentTip].title}</h2>
+                <h2 className="text-xl font-semibold mb-4 text-medicare-darkBlue">{preventionTips[currentTip].title}</h2>
                 <p className="text-gray-700 mb-8">{preventionTips[currentTip].content}</p>
                 <Button 
-                  className="medicare-button mx-auto"
+                  className="medicare-button mx-auto transform hover:scale-105 transition-transform"
                   onClick={handleNextTip}
                 >
                   Next Tip <span className="ml-2">→</span>
@@ -156,7 +206,7 @@ const HealthFacts = () => {
             <span className="ml-2 text-sm text-white/70">© {new Date().getFullYear()}</span>
           </div>
           <div className="text-sm text-white/70">
-            Your trusted AI healthcare companion.
+            Your trusted Medicare AI healthcare companion.
           </div>
         </div>
       </footer>

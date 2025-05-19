@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PageLayout from '@/components/PageLayout';
 import MedicareLogo from '@/components/MedicareLogo';
-import { Button } from '@/components/ui/button';
 
 const Team = () => {
   const teamMembers = [
@@ -106,6 +105,10 @@ const Team = () => {
             </div>
           ))}
         </div>
+        
+        <div className="text-center mt-12 text-gray-700 font-medium">
+          Made in partial fulfillment of Master's in Computer Applications (MCA) with specialization in Machine Learning and Artificial Intelligence under IBM internship program
+        </div>
       </div>
       
       {/* Footer */}
@@ -116,7 +119,7 @@ const Team = () => {
             <span className="ml-2 text-sm text-white/70">© {new Date().getFullYear()}</span>
           </div>
           <div className="text-sm text-white/70">
-            Your trusted AI healthcare companion.
+            Your trusted Medicare AI healthcare companion.
           </div>
         </div>
       </footer>

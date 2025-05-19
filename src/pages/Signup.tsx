@@ -1,12 +1,57 @@
 
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import PageLayout from '@/components/PageLayout';
 import MedicareLogo from '@/components/MedicareLogo';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useToast } from '@/components/ui/use-toast';
 
 const Signup = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handleSignup = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    // Simple validation
+    if (!name || !email || !password) {
+      toast({
+        title: "Error",
+        description: "Please fill in all fields",
+        variant: "destructive"
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    // Mock signup - in real app, this would call the backend API
+    setTimeout(() => {
+      // Save user data to localStorage (in a real app, would use JWT)
+      localStorage.setItem('medicareUserTemp', JSON.stringify({
+        name: name,
+        email: email,
+        // No isAuthenticated flag yet - will be set after profile setup
+      }));
+      
+      toast({
+        title: "Success",
+        description: "Account created! Please complete your profile.",
+        variant: "default"
+      });
+      
+      // Redirect to profile setup
+      navigate('/profile-setup');
+      
+      setIsLoading(false);
+    }, 1000);
+  };
+
   return (
     <PageLayout backgroundImage="medical-tech">
       {/* Header/Navigation */}
@@ -22,7 +67,7 @@ const Signup = () => {
 
       {/* Signup Form */}
       <div className="container mx-auto px-6 py-12 flex justify-center">
-        <div className="w-full max-w-md bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-8">
+        <div className="w-full max-w-md bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-8 animate-fade-in-up">
           <div className="flex justify-center mb-4">
             <MedicareLogo />
           </div>
@@ -30,7 +75,7 @@ const Signup = () => {
           <h1 className="text-2xl font-bold text-center text-medicare-darkBlue mb-2">Create Account</h1>
           <p className="text-center text-gray-600 mb-6">Start your journey with MediCare AI.</p>
           
-          <div className="space-y-4">
+          <form onSubmit={handleSignup} className="space-y-4">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                 Name
@@ -40,6 +85,9 @@ const Signup = () => {
                 id="name"
                 placeholder="Your Name"
                 className="medicare-input"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
               />
             </div>
             
@@ -52,6 +100,9 @@ const Signup = () => {
                 id="email"
                 placeholder="you@example.com"
                 className="medicare-input"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             
@@ -64,11 +115,18 @@ const Signup = () => {
                 id="password"
                 placeholder="Choose a strong password"
                 className="medicare-input"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
             
-            <Button className="w-full medicare-button">
-              Create Account
+            <Button 
+              type="submit"
+              className="w-full medicare-button"
+              disabled={isLoading}
+            >
+              {isLoading ? "Creating Account..." : "Create Account"}
             </Button>
             
             <div className="text-center text-sm text-gray-600">
@@ -77,7 +135,7 @@ const Signup = () => {
                 Sign in
               </Link>
             </div>
-          </div>
+          </form>
         </div>
       </div>
       
@@ -89,7 +147,7 @@ const Signup = () => {
             <span className="ml-2 text-sm text-white/70">© {new Date().getFullYear()}</span>
           </div>
           <div className="text-sm text-white/70">
-            Your trusted AI healthcare companion.
+            Your trusted Medicare AI healthcare companion.
           </div>
         </div>
       </footer>
