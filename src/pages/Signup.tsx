@@ -30,13 +30,43 @@ const Signup = () => {
       return;
     }
 
-    // Mock signup - in real app, this would call the backend API
+    // Check for existing user with same email
+    const existingUserData = localStorage.getItem('medicareUser');
+    const tempUserData = localStorage.getItem('medicareUserTemp');
+    
+    if (existingUserData) {
+      const existingUser = JSON.parse(existingUserData);
+      if (existingUser.email === email) {
+        toast({
+          title: "Error",
+          description: "Email already in use. Please use a different email or login.",
+          variant: "destructive"
+        });
+        setIsLoading(false);
+        return;
+      }
+    }
+    
+    if (tempUserData) {
+      const tempUser = JSON.parse(tempUserData);
+      if (tempUser.email === email) {
+        toast({
+          title: "Error",
+          description: "Email already in use. Please use a different email or login.",
+          variant: "destructive"
+        });
+        setIsLoading(false);
+        return;
+      }
+    }
+
+    // Mock signup - in real app, this would call the backend API and hash passwords
     setTimeout(() => {
-      // Save user data to localStorage (in a real app, would use JWT)
+      // Save user data to localStorage
       localStorage.setItem('medicareUserTemp', JSON.stringify({
         name: name,
         email: email,
-        // No isAuthenticated flag yet - will be set after profile setup
+        password: password, // Note: In a real app, this would be hashed
       }));
       
       toast({
@@ -55,7 +85,7 @@ const Signup = () => {
   return (
     <PageLayout backgroundImage="medical-tech">
       {/* Header/Navigation */}
-      <header className="w-full py-4 px-6 bg-white/80 backdrop-blur-sm">
+      <header className="w-full py-4 px-6 bg-white/20 backdrop-blur-md">
         <div className="container mx-auto flex justify-between items-center">
           <MedicareLogo />
           
@@ -67,7 +97,7 @@ const Signup = () => {
 
       {/* Signup Form */}
       <div className="container mx-auto px-6 py-12 flex justify-center">
-        <div className="w-full max-w-md bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-8 animate-fade-in-up">
+        <div className="w-full max-w-md bg-white/30 backdrop-blur-md rounded-lg shadow-lg p-8 animate-fade-in-up border border-white/30">
           <div className="flex justify-center mb-4">
             <MedicareLogo />
           </div>
@@ -136,6 +166,15 @@ const Signup = () => {
               </Link>
             </div>
           </form>
+          
+          {/* Add decorative AI hand image in corner - using Image 1 */}
+          <div className="absolute -bottom-4 -right-4 w-20 h-20 opacity-60">
+            <img 
+              src="/lovable-uploads/58e80d30-0778-4ff9-8a72-7f660e841b80.png" 
+              alt="AI Healthcare" 
+              className="w-full h-full object-contain"
+            />
+          </div>
         </div>
       </div>
       

@@ -16,8 +16,8 @@ const PageLayout = ({ children, backgroundImage, className = "" }: PageLayoutPro
         style={{ backgroundImage: `url('/lovable-uploads/${getBackgroundImageUrl(backgroundImage)}')` }}
       ></div>
       
-      {/* Very light glassmorphism overlay effect */}
-      <div className="fixed inset-0 bg-gradient-to-br from-medicare-darkBlue/5 to-black/5 backdrop-blur-[1px] -z-10"></div>
+      {/* Light glassmorphism overlay effect */}
+      <div className="fixed inset-0 bg-white/10 backdrop-blur-[2px] -z-10"></div>
       
       {/* Content */}
       <div className={`relative z-10 min-h-screen w-full flex flex-col ${className}`}>
@@ -30,16 +30,16 @@ const PageLayout = ({ children, backgroundImage, className = "" }: PageLayoutPro
 // Helper function to get the background image URL based on the provided key
 function getBackgroundImageUrl(key: string): string {
   const imageMap: Record<string, string> = {
-    'blue-wave': 'dda7863b-b790-420a-b1c3-0d52fec05084.png', // Image 3 - Blue wave
-    'heartbeat': 'c087d4bd-226f-4054-88b9-d8a1f1e60b79.png', // Image 2 - Heartbeat
-    'doctor': 'adbd7cb8-01be-4d37-a587-3577aba68140.png',    // Image 4 - Doctor
-    'medical-tech': '98f2c9ea-b23f-45bd-a71d-ba4db4d40ce5.png', // Image 5 - Medical tech
-    'ai-health': '659deeb1-7ebb-40bf-b626-6f18cedeb066.png', // Image 6 - AI health
-    'heart-hand': '7d2262df-ce65-461d-b63d-e76a5a54e91d.png', // Image 7 - Heart hand
-    'ai-hand': 'ac959dd7-1802-468e-ad99-89d52fce8f88.png'    // Image 1 - AI hand
+    'blue-wave': '10a2b3e4-d5cc-4660-9965-c20d573a50bc.png', // Blue wave background
+    'heartbeat': 'ac3e9d55-cf1f-40bf-a738-c61803dd22e3.png', // Heartbeat background
+    'doctor': 'da1aa9a6-810d-4d75-af14-7ee85001979e.png',    // Doctor background
+    'medical-tech': '52e39081-afac-4ab7-b86a-ee23afffe541.png', // Medical tech background
+    'ai-health': 'bdce3bd1-0ee7-4a5c-9b73-7398f6acf649.png', // AI health background
+    'heart-hand': 'ce0f25af-085c-4ae6-b353-9fb3d603ba19.png', // Heart hand background
+    'ai-hand': '58e80d30-0778-4ff9-8a72-7f660e841b80.png'    // AI hand background (image 1)
   };
   
-  return imageMap[key] || 'dda7863b-b790-420a-b1c3-0d52fec05084.png'; // Default to blue wave if not found
+  return imageMap[key] || '10a2b3e4-d5cc-4660-9965-c20d573a50bc.png'; // Default to blue wave if not found
 }
 
 export default PageLayout;

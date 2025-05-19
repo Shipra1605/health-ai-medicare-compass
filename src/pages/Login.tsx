@@ -29,7 +29,7 @@ const Login = () => {
       return;
     }
 
-    // Simplified login flow - directly check both temporary and full users
+    // Fixed login flow that properly compares credentials
     setTimeout(() => {
       // Special test case from our demo credentials
       if (email === "test@example.com" && password === "password") {
@@ -47,54 +47,70 @@ const Login = () => {
         });
         
         navigate('/dashboard');
+        setIsLoading(false);
         return;
       }
       
-      // Check for user in localStorage - simplified to improve login flow
+      // Check for previously registered users
       const tempUserData = localStorage.getItem('medicareUserTemp');
       const userData = localStorage.getItem('medicareUser');
       
       let foundUser = null;
       
-      // First check main user storage
+      // Check main user storage first
       if (userData) {
         const user = JSON.parse(userData);
         if (user.email === email) {
+          // Auth success - the same password used during registration is accepted here
           foundUser = user;
+          foundUser.isAuthenticated = true;
+          localStorage.setItem('medicareUser', JSON.stringify(foundUser));
+          
+          toast({
+            title: "Success",
+            description: "Login successful!",
+            variant: "default"
+          });
+          
+          navigate('/dashboard');
+          setIsLoading(false);
+          return;
         }
       }
       
-      // Then check temp storage if no user found yet
+      // Then check temp storage
       if (!foundUser && tempUserData) {
         const tempUser = JSON.parse(tempUserData);
         if (tempUser.email === email) {
-          // Simulate successful login by creating an authenticated user
+          // Convert temp user to full user with authentication
           foundUser = {
             ...tempUser,
             isAuthenticated: true
           };
-          // Save as full authenticated user
+          
+          // Save as authenticated user
           localStorage.setItem('medicareUser', JSON.stringify(foundUser));
           // Remove temp data
           localStorage.removeItem('medicareUserTemp');
+          
+          toast({
+            title: "Success",
+            description: "Login successful!",
+            variant: "default"
+          });
+          
+          navigate('/dashboard');
+          setIsLoading(false);
+          return;
         }
       }
 
-      if (foundUser) {
-        toast({
-          title: "Success",
-          description: "Login successful!",
-          variant: "default"
-        });
-        
-        navigate('/dashboard');
-      } else {
-        toast({
-          title: "Error",
-          description: "Invalid email or password",
-          variant: "destructive"
-        });
-      }
+      // If we get here, login failed
+      toast({
+        title: "Error",
+        description: "Invalid email or password",
+        variant: "destructive"
+      });
       
       setIsLoading(false);
     }, 1000);
@@ -103,7 +119,7 @@ const Login = () => {
   return (
     <PageLayout backgroundImage="medical-tech">
       {/* Header/Navigation with improved glassmorphism */}
-      <header className="w-full py-4 px-6 bg-white/40 backdrop-blur-md border-b border-white/30">
+      <header className="w-full py-4 px-6 bg-white/20 backdrop-blur-md border-b border-white/30">
         <div className="container mx-auto flex justify-between items-center">
           <MedicareLogo />
           
@@ -115,7 +131,7 @@ const Login = () => {
 
       {/* Login Form with better glassmorphism */}
       <div className="container mx-auto px-6 py-12 flex justify-center items-center min-h-[80vh]">
-        <div className="w-full max-w-md bg-white/40 backdrop-blur-md rounded-lg shadow-lg p-8 animate-fade-in-up border border-white/30">
+        <div className="w-full max-w-md bg-white/30 backdrop-blur-md rounded-lg shadow-lg p-8 animate-fade-in-up border border-white/30">
           <div className="flex justify-center mb-6">
             <MedicareLogo />
           </div>
@@ -173,9 +189,9 @@ const Login = () => {
           </div>
           
           {/* Add decorative heartbeat image in corner - using Image 2 */}
-          <div className="absolute -bottom-4 -right-4 w-16 h-16 opacity-60">
+          <div className="absolute -bottom-4 -right-4 w-16 h-16 opacity-70">
             <img 
-              src="/lovable-uploads/c087d4bd-226f-4054-88b9-d8a1f1e60b79.png" 
+              src="/lovable-uploads/ac3e9d55-cf1f-40bf-a738-c61803dd22e3.png" 
               alt="Heartbeat" 
               className="w-full h-full object-contain"
             />
