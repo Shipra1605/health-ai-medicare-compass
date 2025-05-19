@@ -31,14 +31,43 @@ const Login = () => {
 
     // Mock authentication - in real app, this would call the backend API
     setTimeout(() => {
-      // Check if credentials match any test user
+      // Get all users from localStorage to find a match
+      const allUsers = [];
+      let matchedUser = null;
+      
+      // Look for the temporary user data
+      const tempUserData = localStorage.getItem('medicareUserTemp');
+      if (tempUserData) {
+        const tempUser = JSON.parse(tempUserData);
+        if (tempUser.email === email) {
+          allUsers.push(tempUser);
+        }
+      }
+      
+      // Check for any fully registered users
+      const userData = localStorage.getItem('medicareUser');
+      if (userData) {
+        const user = JSON.parse(userData);
+        if (user.email === email) {
+          allUsers.push(user);
+          if (user.isAuthenticated) {
+            matchedUser = user; // If we find an authenticated user with this email, use it
+          }
+        }
+      }
+      
+      // Special test case from our demo credentials
       if (email === "test@example.com" && password === "password") {
-        // Save user data to localStorage (in a real app, would use JWT)
-        localStorage.setItem('medicareUser', JSON.stringify({
+        matchedUser = {
           name: "Test User",
           email: email,
           isAuthenticated: true
-        }));
+        };
+      }
+
+      if (matchedUser) {
+        // Save user data to localStorage (in a real app, would use JWT)
+        localStorage.setItem('medicareUser', JSON.stringify(matchedUser));
         
         toast({
           title: "Success",
@@ -60,8 +89,8 @@ const Login = () => {
 
   return (
     <PageLayout backgroundImage="medical-tech">
-      {/* Header/Navigation */}
-      <header className="w-full py-4 px-6 bg-white/80 backdrop-blur-sm">
+      {/* Header/Navigation - with glassmorphism */}
+      <header className="w-full py-4 px-6 bg-white/70 backdrop-blur-md border-b border-white/30">
         <div className="container mx-auto flex justify-between items-center">
           <MedicareLogo />
           
@@ -71,14 +100,14 @@ const Login = () => {
         </div>
       </header>
 
-      {/* Login Form */}
+      {/* Login Form - with glassmorphism */}
       <div className="container mx-auto px-6 py-12 flex justify-center items-center min-h-[80vh]">
-        <div className="w-full max-w-md bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-8 animate-fade-in-up">
+        <div className="w-full max-w-md bg-white/70 backdrop-blur-md rounded-lg shadow-lg p-8 animate-fade-in-up border border-white/30">
           <div className="flex justify-center mb-6">
             <MedicareLogo />
           </div>
           
-          <h1 className="text-2xl font-bold text-center text-medicare-darkBlue mb-6">Sign In to MediCare AI</h1>
+          <h1 className="text-2xl font-bold text-center text-medicare-darkBlue mb-6">Welcome Back</h1>
           
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
@@ -132,7 +161,7 @@ const Login = () => {
         </div>
       </div>
       
-      {/* Footer */}
+      {/* Footer - with updated Medicare AI text */}
       <footer className="bg-medicare-darkBlue text-white py-4 mt-auto">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center">

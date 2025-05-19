@@ -11,9 +11,13 @@ const PageLayout = ({ children, backgroundImage, className = "" }: PageLayoutPro
   return (
     <div className="relative min-h-screen w-full flex flex-col">
       {/* Background Image with proper styling */}
-      <div className={`fixed inset-0 w-full h-full -z-10 bg-cover bg-center bg-no-repeat`} 
-           style={{ backgroundImage: `url('/lovable-uploads/${getBackgroundImageUrl(backgroundImage)}')` }}></div>
-      <div className="fixed inset-0 bg-gradient-to-br from-medicare-darkBlue/30 to-black/20 backdrop-blur-[2px] -z-10"></div>
+      <div 
+        className={`fixed inset-0 w-full h-full -z-10 bg-cover bg-center bg-no-repeat`} 
+        style={{ backgroundImage: `url('/lovable-uploads/${getBackgroundImageUrl(backgroundImage)}')` }}
+      ></div>
+      
+      {/* Glassmorphism overlay effect - lighter and more transparent */}
+      <div className="fixed inset-0 bg-gradient-to-br from-medicare-darkBlue/10 to-black/10 backdrop-blur-[1px] -z-10"></div>
       
       {/* Content */}
       <div className={`relative z-10 min-h-screen w-full flex flex-col ${className}`}>
@@ -26,16 +30,16 @@ const PageLayout = ({ children, backgroundImage, className = "" }: PageLayoutPro
 // Helper function to get the background image URL based on the provided key
 function getBackgroundImageUrl(key: string): string {
   const imageMap: Record<string, string> = {
-    'blue-wave': '991eddcd-19d9-401d-8234-b80eb4037710.png', // Updated to the new wave image
-    'heartbeat': 'c2f01002-a6bc-4f7e-9288-5ab1282c8e2e.png', // Updated to the new heartbeat image
-    'doctor': '3311cbf1-a3f6-49be-ba2f-5b4a0ebad524.png', // Updated to the new doctor wireframe
-    'medical-tech': '82a3c212-9c4f-424b-af23-756093424a68.png', // Updated to the new tech image
-    'ai-health': '34b16420-6f0e-42c8-bfef-eecbb679a42f.png', // Updated to the new AI health image
-    'heart-hand': '9d744497-4f97-4bdc-94b1-01c3217c77a8.png', // Updated to the new heart-hand image
-    'ai-hand': '9d744497-4f97-4bdc-94b1-01c3217c77a8.png' // Using the robot hand with heart image
+    'blue-wave': 'c9e108e7-c348-41a6-bbaf-3907b45a19e7.png', // Updated to new wave image
+    'heartbeat': 'c6ce4eb6-27f2-4b4e-9ed7-809c21bf1aba.png', // Updated to new heartbeat image
+    'doctor': 'fe2690d1-7a76-4475-9fb2-07a3be88f737.png', // Updated to new doctor image
+    'medical-tech': '63e49c0b-d661-4b63-8ab8-418939d44f15.png', // Updated to new tech image
+    'ai-health': 'aef9c64e-5d02-4e64-a60e-73a60e76f861.png', // Updated to new AI health image
+    'heart-hand': '01c42de6-10a3-4b48-9213-bce95b3198de.png', // Updated to new heart-hand image
+    'ai-hand': '62f7cc5b-4b7e-4350-a2d1-8b4c83c013a0.png' // Updated to new AI hand image
   };
   
-  return imageMap[key] || '991eddcd-19d9-401d-8234-b80eb4037710.png'; // Default to blue wave if not found
+  return imageMap[key] || 'c9e108e7-c348-41a6-bbaf-3907b45a19e7.png'; // Default to blue wave if not found
 }
 
 export default PageLayout;
