@@ -95,38 +95,33 @@
 }
 
 @layer components {
-  /* Enhanced Glassmorphism Card styles */
+  /* Card styles */
   .medicare-card {
-    @apply bg-white/40 backdrop-blur-md rounded-lg shadow-md p-6 transition-all duration-300 border border-white/30;
+    @apply bg-white/90 backdrop-blur-sm rounded-lg shadow-md p-6 transition-all duration-300;
   }
   
-  /* Enhanced Glass card effect with more transparency */
+  /* Glass card effect */
   .glass-card {
-    @apply bg-white/30 backdrop-blur-md border border-white/30 shadow-lg rounded-lg;
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-lg rounded-lg;
   }
   
-  /* Button styles with 3D effect */
+  /* Button styles */
   .medicare-button {
-    @apply bg-medicare-blue text-white font-medium rounded-md px-4 py-2 hover:bg-medicare-blue/90 transition-all duration-200 
-    shadow-md hover:shadow-lg flex items-center justify-center gap-2 transform hover:scale-105 
-    border border-medicare-blue/20;
+    @apply bg-medicare-blue text-white font-medium rounded-md px-4 py-2 hover:bg-medicare-blue/90 transition-all duration-200 shadow-sm flex items-center justify-center gap-2;
   }
 
   .medicare-button-outline {
-    @apply border border-medicare-blue text-medicare-blue font-medium rounded-md px-4 py-2 
-    hover:bg-medicare-blue hover:text-white transition-all duration-200 
-    flex items-center justify-center gap-2 transform hover:scale-105
-    shadow-md hover:shadow-lg;
+    @apply border border-medicare-blue text-medicare-blue font-medium rounded-md px-4 py-2 hover:bg-medicare-blue hover:text-white transition-all duration-200 flex items-center justify-center gap-2;
   }
 
   /* Input styles */
   .medicare-input {
-    @apply border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-medicare-blue/50 focus:border-medicare-blue/50 bg-white/70 w-full;
+    @apply border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-medicare-blue/50 focus:border-medicare-blue/50 bg-white w-full;
   }
 
-  /* Header styles with enhanced glassmorphism */
+  /* Header styles */
   .header-container {
-    @apply w-full py-3 px-6 bg-white/50 backdrop-blur-md shadow-sm border-b border-white/30;
+    @apply w-full py-3 px-6 bg-white/80 backdrop-blur-sm shadow-sm;
   }
 
   /* Section styles */
@@ -134,69 +129,36 @@
     @apply container mx-auto px-4 py-6;
   }
 
-  /* Heading styles with text shadow for better visibility on image backgrounds */
+  /* Heading styles */
   .heading-primary {
-    @apply text-2xl md:text-3xl font-bold text-medicare-darkBlue mb-4 text-shadow-sm;
+    @apply text-2xl md:text-3xl font-bold text-medicare-darkBlue mb-4;
   }
 
   .heading-secondary {
-    @apply text-xl md:text-2xl font-semibold text-medicare-darkBlue mb-3 text-shadow-xs;
+    @apply text-xl md:text-2xl font-semibold text-medicare-darkBlue mb-3;
   }
 
-  /* Enhanced Tab styles with 3D effect */
+  /* Tab styles */
   .tab-button {
-    @apply px-4 py-2 text-gray-600 rounded-t-lg hover:text-medicare-blue transition-colors 
-    transform hover:scale-105 shadow hover:shadow-md;
+    @apply px-4 py-2 text-gray-600 rounded-t-lg hover:text-medicare-blue transition-colors;
   }
 
   .tab-button-active {
-    @apply px-4 py-2 text-medicare-blue bg-white/50 backdrop-blur-md rounded-t-lg 
-    border-b-2 border-medicare-blue font-medium transform hover:scale-105 
-    shadow-md;
+    @apply px-4 py-2 text-medicare-blue bg-white/80 rounded-t-lg border-b-2 border-medicare-blue font-medium;
   }
 
-  /* Content container with improved glassmorphism */
+  /* Content container */
   .content-container {
-    @apply bg-white/40 backdrop-blur-md rounded-lg shadow-md p-6 mb-6 border border-white/30;
+    @apply bg-white/90 backdrop-blur-sm rounded-lg shadow-md p-6 mb-6;
   }
 
-  /* Enhanced 3D and Glass Effects */
+  /* 3D and Glass Effects */
   .card-3d {
-    @apply transition-all duration-300 hover:shadow-xl hover:transform hover:scale-[1.02] hover:-translate-y-1
-    border border-white/30 shadow;
+    @apply transition-all duration-300 hover:shadow-xl hover:transform hover:scale-[1.02] hover:-translate-y-1;
   }
   
-  /* Text shadow utilities for better text visibility on image backgrounds */
-  .text-shadow-sm {
-    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  }
-  
-  .text-shadow-md {
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-  }
-  
-  .text-shadow-lg {
-    text-shadow: 0 4px 8px rgba(0,0,0,0.4);
-  }
-  
-  .text-shadow-xl {
-    text-shadow: 0 8px 16px rgba(0,0,0,0.5);
-  }
-  
-  .text-shadow-none {
-    text-shadow: none;
-  }
-  
-  .text-shadow-outline {
-    text-shadow: 
-      -1px -1px 0 #000,  
-       1px -1px 0 #000,
-      -1px  1px 0 #000,
-       1px  1px 0 #000;
-  }
-  
-  .text-shadow-xs {
-    text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-lg;
   }
   
   /* Animation Classes */

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import PageLayout from '@/components/PageLayout';
@@ -177,8 +178,8 @@ const Dashboard = () => {
 
   return (
     <PageLayout backgroundImage="medical-tech">
-      {/* Header/Navigation - with glassmorphism */}
-      <header className="w-full py-4 px-6 bg-white/70 backdrop-blur-md border-b border-white/30">
+      {/* Header/Navigation */}
+      <header className="w-full py-4 px-6 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto flex justify-between items-center">
           <MedicareLogo />
           
@@ -193,14 +194,14 @@ const Dashboard = () => {
 
       {/* Dashboard Content */}
       <div className="container mx-auto px-6 py-8">
-        <h1 className="text-2xl font-bold text-white drop-shadow-md mb-6">
+        <h1 className="text-2xl font-bold text-medicare-darkBlue mb-6">
           Welcome back, {user?.name || 'User'}!
         </h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Patient Profile Section - with glassmorphism */}
+          {/* Patient Profile Section */}
           <div>
-            <div className="glass-card mb-6">
+            <div className="medicare-card mb-6">
               <div className="flex items-center gap-2 mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -224,7 +225,7 @@ const Dashboard = () => {
                       </svg>
                     </div>
                   )}
-                  <label className="absolute bottom-0 right-0 bg-medicare-blue text-white rounded-full p-1 cursor-pointer transform hover:scale-110 transition-transform">
+                  <label className="absolute bottom-0 right-0 bg-medicare-blue text-white rounded-full p-1 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -261,8 +262,8 @@ const Dashboard = () => {
               </div>
             </div>
 
-            {/* Medical Records Section - with glassmorphism */}
-            <div className="glass-card">
+            {/* Medical Records Section */}
+            <div className="medicare-card">
               <div className="flex items-center gap-2 mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -291,7 +292,7 @@ const Dashboard = () => {
               {medicalRecords.length > 0 ? (
                 <div className="space-y-3">
                   {medicalRecords.map((record) => (
-                    <div key={record.id} className="border rounded-lg p-3 flex items-center justify-between bg-white/70 backdrop-blur-sm">
+                    <div key={record.id} className="border rounded-lg p-3 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
@@ -301,7 +302,7 @@ const Dashboard = () => {
                       <div className="flex items-center gap-2">
                         <span className="text-xs text-gray-500">{record.date}</span>
                         <button 
-                          className="text-red-500 hover:text-red-700 transform hover:scale-110 transition-transform"
+                          className="text-red-500 hover:text-red-700"
                           onClick={() => handleDeleteRecord(record.id)}
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -313,17 +314,17 @@ const Dashboard = () => {
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-4 text-gray-500 bg-white/50 backdrop-blur-sm rounded-lg">
+                <div className="text-center py-4 text-gray-500">
                   No medical records uploaded
                 </div>
               )}
             </div>
           </div>
 
-          {/* Main Content - 2/3 width - with glassmorphism */}
+          {/* Main Content - 2/3 width */}
           <div className="lg:col-span-2 space-y-6">
             {/* Symptom Analysis Section */}
-            <div className="glass-card">
+            <div className="medicare-card">
               <div className="flex items-center gap-2 mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -370,7 +371,7 @@ const Dashboard = () => {
             </div>
 
             {/* Previous Recommendations Section */}
-            <div className="glass-card">
+            <div className="medicare-card">
               <div className="flex items-center gap-2 mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -381,11 +382,11 @@ const Dashboard = () => {
 
               {recommendations.length > 0 ? (
                 recommendations.map((rec) => (
-                  <div key={rec.id} className="border-b last:border-b-0 py-4 bg-white/40 backdrop-blur-sm px-4 rounded-lg mb-2">
+                  <div key={rec.id} className="border-b last:border-b-0 py-4">
                     <div className="flex justify-between items-center mb-1">
                       <p className="font-medium">Symptoms: {rec.symptom}</p>
                       <button 
-                        className="text-medicare-blue text-sm hover:underline transform hover:scale-105 transition-transform"
+                        className="text-medicare-blue text-sm hover:underline"
                         onClick={() => handleViewRecommendation(rec.id)}
                       >
                         View Details
@@ -400,14 +401,14 @@ const Dashboard = () => {
                   </div>
                 ))
               ) : (
-                <div className="text-center py-4 text-gray-500 bg-white/40 backdrop-blur-sm rounded-lg">
+                <div className="text-center py-4 text-gray-500">
                   No previous recommendations
                 </div>
               )}
             </div>
 
             {/* Personalized Treatment Section */}
-            <div className="glass-card">
+            <div className="medicare-card">
               <div className="flex items-center gap-2 mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -473,7 +474,7 @@ const Dashboard = () => {
         </div>
       </div>
       
-      {/* Footer - with updated Medicare AI text */}
+      {/* Footer */}
       <footer className="bg-medicare-darkBlue text-white py-4 mt-auto">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center">

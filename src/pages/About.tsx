@@ -58,9 +58,9 @@ const About = () => {
   ];
 
   return (
-    <PageLayout backgroundImage="ai-health">
-      {/* Header/Navigation with improved glassmorphism */}
-      <header className="w-full py-4 px-6 bg-white/40 backdrop-blur-sm">
+    <PageLayout backgroundImage="ai-hand">
+      {/* Header/Navigation */}
+      <header className="w-full py-4 px-6 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto flex justify-between items-center">
           <MedicareLogo />
           
@@ -72,7 +72,7 @@ const About = () => {
 
       {/* Main Content */}
       <div className="container mx-auto px-6 py-8">
-        <h1 className="text-3xl font-bold text-center mb-8 text-white drop-shadow-lg text-shadow-outline">About MediCare AI</h1>
+        <h1 className="text-3xl font-bold text-center mb-8 text-white drop-shadow-lg">About MediCare AI</h1>
         
         <div className="medicare-card glass-card mb-8">
           <div className="space-y-4 max-w-3xl mx-auto">
@@ -87,24 +87,24 @@ const About = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-          <div className="glass-card hover:shadow-xl transition-all transform hover:scale-[1.01] card-3d">
+          <div className="medicare-card glass-card hover:shadow-xl transition-all transform hover:scale-[1.01] card-3d">
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 text-xl shadow-md">
-                <span className="transform hover:scale-110 transition-transform">🧠</span>
+              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 text-xl">
+                🧠
               </div>
-              <h2 className="text-xl font-semibold text-medicare-darkBlue text-shadow-sm">AI-Powered Analysis</h2>
+              <h2 className="text-xl font-semibold text-medicare-darkBlue">AI-Powered Analysis</h2>
             </div>
             <p className="text-gray-700">
               MediCare AI integrates advanced machine learning models including ClinicalBERT for natural language processing of medical texts and XGBoost for classification of structured patient data. This dual approach enables a comprehensive analysis of both medical history narratives and specific health metrics.
             </p>
           </div>
 
-          <div className="glass-card hover:shadow-xl transition-all transform hover:scale-[1.01] card-3d">
+          <div className="medicare-card glass-card hover:shadow-xl transition-all transform hover:scale-[1.01] card-3d">
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 text-xl shadow-md">
-                <span className="transform hover:scale-110 transition-transform">💾</span>
+              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 text-xl">
+                💾
               </div>
-              <h2 className="text-xl font-semibold text-medicare-darkBlue text-shadow-sm">Comprehensive Data Processing</h2>
+              <h2 className="text-xl font-semibold text-medicare-darkBlue">Comprehensive Data Processing</h2>
             </div>
             <p className="text-gray-700">
               Our system processes both structured and unstructured medical data, converting complex patient information into actionable insights. The platform handles everything from laboratory test results to doctor's notes, creating a holistic view of each patient's unique health profile.
@@ -112,16 +112,16 @@ const About = () => {
           </div>
         </div>
 
-        {/* Objectives Section with enhanced 3D effects */}
-        <div className="glass-card mb-10">
-          <h2 className="text-2xl font-bold text-center mb-6 text-medicare-darkBlue text-shadow-sm">Our Objectives</h2>
+        {/* Objectives Section */}
+        <div className="medicare-card glass-card mb-10">
+          <h2 className="text-2xl font-bold text-center mb-6 text-medicare-darkBlue">Our Objectives</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {objectives.map((objective, index) => (
               <div 
                 key={index} 
-                className="p-4 border rounded-lg text-center hover:shadow-md transition-shadow transform hover:scale-[1.03] card-3d bg-white/50"
+                className="p-4 border rounded-lg text-center hover:shadow-md transition-shadow transform hover:scale-[1.03] card-3d bg-white/80"
               >
-                <div className="text-4xl mb-3 transform hover:scale-110 transition-transform">{objective.icon}</div>
+                <div className="text-4xl mb-3">{objective.icon}</div>
                 <h3 className="text-lg font-semibold mb-2 text-medicare-darkBlue">{objective.title}</h3>
                 <p className="text-sm text-gray-600">{objective.description}</p>
               </div>
@@ -129,17 +129,17 @@ const About = () => {
           </div>
         </div>
 
-        {/* Technology Stack with improved 3D styling */}
-        <div className="glass-card">
-          <h2 className="text-2xl font-bold text-center mb-6 text-medicare-darkBlue text-shadow-sm">Technology Stack</h2>
+        {/* Technology Stack */}
+        <div className="medicare-card glass-card">
+          <h2 className="text-2xl font-bold text-center mb-6 text-medicare-darkBlue">Technology Stack</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {techStack.map((tech, index) => (
               <div 
                 key={index} 
-                className="p-4 bg-white/50 rounded-lg shadow-md hover:shadow-xl transition-all transform hover:scale-[1.03] card-3d"
+                className="p-4 bg-white/90 rounded-lg shadow-md hover:shadow-xl transition-all transform hover:scale-[1.03] card-3d"
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-2xl transform hover:scale-110 transition-transform">{tech.icon}</span>
+                  <span className="text-2xl">{tech.icon}</span>
                   <h3 className="font-semibold text-medicare-blue">{tech.category}</h3>
                 </div>
                 <p className="text-gray-700 text-sm">{tech.technologies}</p>
@@ -149,7 +149,7 @@ const About = () => {
         </div>
       </div>
       
-      {/* Footer with updated Medicare AI text */}
+      {/* Footer */}
       <footer className="bg-medicare-darkBlue text-white py-4 mt-auto">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center">
