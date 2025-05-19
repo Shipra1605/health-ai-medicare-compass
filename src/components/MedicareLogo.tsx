@@ -8,13 +8,19 @@ interface LogoProps {
 const MedicareLogo = ({ className = "" }: LogoProps) => {
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <div className="w-10 h-10 bg-medicare-blue rounded-md flex items-center justify-center text-white relative">
-        {/* Heart with heartbeat waveform */}
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" fill="#0ea5e9" />
+      <div className="w-10 h-10 bg-medicare-blue rounded-md flex items-center justify-center text-white relative shadow-lg animate-pulse-subtle">
+        {/* Hands holding heart with heartbeat waveform */}
+        <div className="relative w-8 h-8">
+          {/* Heart in hands */}
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+            <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" fill="#0ea5e9" />
+          </svg>
+          
           {/* Heartbeat line */}
-          <path d="M3.22 12H9.5l.5-1 .5 1h6.28" stroke="#ffffff" strokeWidth="1.5" />
-        </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-4">
+            <polyline points="3,6 7,6 9,2 11,10 13,0 15,6 19,6" />
+          </svg>
+        </div>
       </div>
       <div className="flex flex-col">
         <h1 className="font-bold text-medicare-darkBlue">

@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PageLayout from '@/components/PageLayout';
 import MedicareLogo from '@/components/MedicareLogo';
+import { Button } from '@/components/ui/button';
 
 const About = () => {
   const objectives = [
@@ -31,28 +32,33 @@ const About = () => {
   const techStack = [
     {
       category: "Frontend",
-      technologies: "React.js, Tailwind CSS, TypeScript, Vite"
+      technologies: "React.js, Tailwind CSS, TypeScript, Vite",
+      icon: "💻"
     },
     {
       category: "Backend",
-      technologies: "Node.js, Express, MySQL"
+      technologies: "Node.js, Express, MySQL",
+      icon: "⚙️"
     },
     {
       category: "ML Models",
-      technologies: "ClinicalBERT, XGBoost"
+      technologies: "ClinicalBERT, XGBoost",
+      icon: "🧠"
     },
     {
       category: "UI Components",
-      technologies: "Shadcn UI, Lucide Icons"
+      technologies: "Shadcn UI, Lucide Icons",
+      icon: "🎨"
     },
     {
       category: "AI Layer",
-      technologies: "SHAP for explainability, React Query for state management"
+      technologies: "SHAP for explainability, React Query for state management",
+      icon: "🤖"
     }
   ];
 
   return (
-    <PageLayout backgroundImage="heart-hand">
+    <PageLayout backgroundImage="ai-hand">
       {/* Header/Navigation */}
       <header className="w-full py-4 px-6 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto flex justify-between items-center">
@@ -65,11 +71,11 @@ const About = () => {
       </header>
 
       {/* Main Content */}
-      <div className="container mx-auto px-6 py-12">
-        <div className="medicare-card mb-10">
-          <h1 className="text-3xl font-bold text-center mb-8 border-b pb-4 text-medicare-darkBlue">About MediCare AI</h1>
-          
-          <div className="space-y-6 max-w-3xl mx-auto">
+      <div className="container mx-auto px-6 py-8">
+        <h1 className="text-3xl font-bold text-center mb-8 text-white drop-shadow-lg">About MediCare AI</h1>
+        
+        <div className="medicare-card glass-card mb-8">
+          <div className="space-y-4 max-w-3xl mx-auto">
             <p className="text-gray-700">
               MediCare AI harnesses cutting-edge ML and AI to deliver accurate medical recommendations in real-time. Our dual-model approach combines ClinicalBERT for natural language understanding with XGBoost for structured data analysis. We process both structured metrics and unstructured narratives to create comprehensive patient profiles.
             </p>
@@ -80,8 +86,8 @@ const About = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <div className="medicare-card hover:shadow-lg transition-all transform hover:scale-[1.01]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+          <div className="medicare-card glass-card hover:shadow-xl transition-all transform hover:scale-[1.01] card-3d">
             <div className="flex items-center gap-4 mb-4">
               <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 text-xl">
                 🧠
@@ -93,7 +99,7 @@ const About = () => {
             </p>
           </div>
 
-          <div className="medicare-card hover:shadow-lg transition-all transform hover:scale-[1.01]">
+          <div className="medicare-card glass-card hover:shadow-xl transition-all transform hover:scale-[1.01] card-3d">
             <div className="flex items-center gap-4 mb-4">
               <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 text-xl">
                 💾
@@ -107,13 +113,13 @@ const About = () => {
         </div>
 
         {/* Objectives Section */}
-        <div className="medicare-card mb-12">
-          <h2 className="text-2xl font-bold text-center mb-8 text-medicare-darkBlue">Our Objectives</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="medicare-card glass-card mb-10">
+          <h2 className="text-2xl font-bold text-center mb-6 text-medicare-darkBlue">Our Objectives</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {objectives.map((objective, index) => (
               <div 
                 key={index} 
-                className="p-4 border rounded-lg text-center hover:shadow-md transition-shadow transform hover:scale-[1.03] transition-transform"
+                className="p-4 border rounded-lg text-center hover:shadow-md transition-shadow transform hover:scale-[1.03] card-3d bg-white/80"
               >
                 <div className="text-4xl mb-3">{objective.icon}</div>
                 <h3 className="text-lg font-semibold mb-2 text-medicare-darkBlue">{objective.title}</h3>
@@ -124,15 +130,18 @@ const About = () => {
         </div>
 
         {/* Technology Stack */}
-        <div className="medicare-card">
-          <h2 className="text-2xl font-bold text-center mb-8 text-medicare-darkBlue">Technology Stack</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="medicare-card glass-card">
+          <h2 className="text-2xl font-bold text-center mb-6 text-medicare-darkBlue">Technology Stack</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {techStack.map((tech, index) => (
               <div 
                 key={index} 
-                className="p-4 bg-gray-50 rounded-lg hover:shadow-md transition-shadow transform hover:scale-[1.03] transition-transform"
+                className="p-4 bg-white/90 rounded-lg shadow-md hover:shadow-xl transition-all transform hover:scale-[1.03] card-3d"
               >
-                <h3 className="font-semibold text-medicare-blue mb-2">{tech.category}</h3>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">{tech.icon}</span>
+                  <h3 className="font-semibold text-medicare-blue">{tech.category}</h3>
+                </div>
                 <p className="text-gray-700 text-sm">{tech.technologies}</p>
               </div>
             ))}
@@ -148,7 +157,7 @@ const About = () => {
             <span className="ml-2 text-sm text-white/70">© {new Date().getFullYear()}</span>
           </div>
           <div className="text-sm text-white/70">
-            Your trusted Medicare AI healthcare companion.
+            Made in partial fulfillment of Master's in Computer Applications (MCA) with specialization in Machine Learning and Artificial Intelligence under IBM internship program
           </div>
         </div>
       </footer>

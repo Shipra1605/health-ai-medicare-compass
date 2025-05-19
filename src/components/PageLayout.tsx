@@ -9,7 +9,7 @@ interface PageLayoutProps {
 
 const PageLayout = ({ children, backgroundImage, className = "" }: PageLayoutProps) => {
   return (
-    <div className="relative min-h-screen w-full">
+    <div className="relative min-h-screen w-full flex flex-col">
       {/* Background Image with proper styling */}
       <div className={`fixed inset-0 w-full h-full -z-10 bg-cover bg-center bg-no-repeat`} 
            style={{ backgroundImage: `url('/lovable-uploads/${getBackgroundImageUrl(backgroundImage)}')` }}></div>
@@ -26,16 +26,16 @@ const PageLayout = ({ children, backgroundImage, className = "" }: PageLayoutPro
 // Helper function to get the background image URL based on the provided key
 function getBackgroundImageUrl(key: string): string {
   const imageMap: Record<string, string> = {
-    'blue-wave': '4150ee48-6d99-44ea-9fcc-7c08c4e18adf.png', // Healthcare hexagons and wave
-    'heartbeat': 'af2414f3-fe4d-4442-be47-1f1bbb4c2795.png', // ECG line
-    'doctor': 'b3202aa6-a842-4b38-8c38-80bc5ae8d915.png', // Doctor wireframe
-    'medical-tech': 'b71ac128-1941-40b8-a3a0-9a8a4f89abd3.png', // AI doctor with hexagons
-    'ai-health': '294bd21d-ad9d-4a6d-8f67-7a303529ac22.png', // Medical cross with tech
-    'heart-hand': '694f2925-1ff2-41bf-8ee3-b9f1174e0031.png', // Robotic hand with human hand
-    'ai-hand': '5acf27d2-ccca-45cf-a068-4ec0920f4488.png' // Robot hand with heart
+    'blue-wave': '991eddcd-19d9-401d-8234-b80eb4037710.png', // Updated to the new wave image
+    'heartbeat': 'c2f01002-a6bc-4f7e-9288-5ab1282c8e2e.png', // Updated to the new heartbeat image
+    'doctor': '3311cbf1-a3f6-49be-ba2f-5b4a0ebad524.png', // Updated to the new doctor wireframe
+    'medical-tech': '82a3c212-9c4f-424b-af23-756093424a68.png', // Updated to the new tech image
+    'ai-health': '34b16420-6f0e-42c8-bfef-eecbb679a42f.png', // Updated to the new AI health image
+    'heart-hand': '9d744497-4f97-4bdc-94b1-01c3217c77a8.png', // Updated to the new heart-hand image
+    'ai-hand': '9d744497-4f97-4bdc-94b1-01c3217c77a8.png' // Using the robot hand with heart image
   };
   
-  return imageMap[key] || '4150ee48-6d99-44ea-9fcc-7c08c4e18adf.png';
+  return imageMap[key] || '991eddcd-19d9-401d-8234-b80eb4037710.png'; // Default to blue wave if not found
 }
 
 export default PageLayout;
