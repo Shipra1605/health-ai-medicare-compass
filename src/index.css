@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -94,38 +95,38 @@
 }
 
 @layer components {
-  /* Enhanced Glassmorphism Card styles */
+  /* Enhanced Glassmorphism Card styles with 3D effect */
   .medicare-card {
-    @apply bg-white/40 backdrop-blur-md rounded-lg shadow-md p-6 transition-all duration-300 border border-white/30;
+    @apply bg-white/50 backdrop-blur-md rounded-lg shadow-lg p-6 transition-all duration-300 border border-white/40 hover:shadow-xl;
   }
   
-  /* Enhanced Glass card effect with more transparency */
+  /* Enhanced Glass card effect with more transparency and 3D */
   .glass-card {
-    @apply bg-white/40 backdrop-blur-md border border-white/30 shadow-lg rounded-lg;
+    @apply bg-white/50 backdrop-blur-md border border-white/40 shadow-lg rounded-lg hover:shadow-xl transition-all duration-300;
   }
   
-  /* Button styles with 3D effect */
+  /* 3D Button styles with enhanced effect */
   .medicare-button {
     @apply bg-medicare-blue text-white font-medium rounded-md px-4 py-2 hover:bg-medicare-blue/90 transition-all duration-200 
     shadow-md hover:shadow-lg flex items-center justify-center gap-2 transform hover:scale-105 
-    border border-medicare-blue/20;
+    border border-medicare-blue/20 hover:translate-y-[-2px];
   }
 
   .medicare-button-outline {
     @apply border border-medicare-blue text-medicare-blue font-medium rounded-md px-4 py-2 
     hover:bg-medicare-blue hover:text-white transition-all duration-200 
     flex items-center justify-center gap-2 transform hover:scale-105
-    shadow-md hover:shadow-lg;
+    shadow-md hover:shadow-lg hover:translate-y-[-2px];
   }
 
-  /* Input styles */
+  /* Input styles with 3D effect */
   .medicare-input {
-    @apply border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-medicare-blue/50 focus:border-medicare-blue/50 bg-white/70 w-full;
+    @apply border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-medicare-blue/50 focus:border-medicare-blue/50 bg-white/70 w-full shadow-sm focus:shadow-md transition-all duration-200;
   }
 
   /* Header styles with enhanced glassmorphism */
   .header-container {
-    @apply w-full py-3 px-6 bg-white/50 backdrop-blur-md shadow-sm border-b border-white/30;
+    @apply w-full py-3 px-6 bg-white/50 backdrop-blur-md shadow-md border-b border-white/40;
   }
 
   /* Section styles */
@@ -145,24 +146,24 @@
   /* Enhanced Tab styles with 3D effect */
   .tab-button {
     @apply px-4 py-2 text-gray-600 rounded-t-lg hover:text-medicare-blue transition-colors 
-    transform hover:scale-105 shadow hover:shadow-md;
+    transform hover:scale-105 shadow hover:shadow-md hover:translate-y-[-2px] transition-all duration-200;
   }
 
   .tab-button-active {
     @apply px-4 py-2 text-medicare-blue bg-white/50 backdrop-blur-md rounded-t-lg 
     border-b-2 border-medicare-blue font-medium transform hover:scale-105 
-    shadow-md;
+    shadow-md hover:translate-y-[-2px] transition-all duration-200;
   }
 
   /* Content container with improved glassmorphism */
   .content-container {
-    @apply bg-white/40 backdrop-blur-md rounded-lg shadow-md p-6 mb-6 border border-white/30;
+    @apply bg-white/50 backdrop-blur-md rounded-lg shadow-md p-6 mb-6 border border-white/40 hover:shadow-lg transition-all duration-300;
   }
 
   /* Enhanced 3D and Glass Effects */
   .card-3d {
     @apply transition-all duration-300 hover:shadow-xl hover:transform hover:scale-[1.02] hover:-translate-y-1
-    border border-white/30 shadow;
+    border border-white/40 shadow-md;
   }
   
   /* Text shadow utilities for better text visibility on image backgrounds */
@@ -171,15 +172,15 @@
   }
   
   .text-shadow-md {
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.25);
   }
   
   .text-shadow-lg {
-    text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    text-shadow: 0 4px 8px rgba(0,0,0,0.3);
   }
   
   .text-shadow-xl {
-    text-shadow: 0 8px 16px rgba(0,0,0,0.5);
+    text-shadow: 0 8px 16px rgba(0,0,0,0.35);
   }
   
   .text-shadow-none {
@@ -211,6 +212,15 @@
     @apply transition-transform duration-200 hover:scale-105;
   }
   
+  .hover-3d {
+    @apply transition-all duration-300 hover:shadow-xl hover:transform hover:scale-[1.03] hover:-translate-y-1;
+  }
+  
+  /* 3D logo animation */
+  .logo-3d {
+    @apply transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-xl;
+  }
+  
   /* Keyframes */
   @keyframes fadeInUp {
     from {
@@ -230,5 +240,19 @@
     50% {
       box-shadow: 0 5px 25px rgba(14, 165, 233, 0.3);
     }
+  }
+  
+  /* 3D button hover animation */
+  .button-3d {
+    @apply relative overflow-hidden transition-all duration-300 transform hover:translate-y-[-3px] hover:shadow-lg;
+  }
+  
+  .button-3d:before {
+    content: "";
+    @apply absolute inset-0 bg-white/10 opacity-0 transition-opacity duration-300;
+  }
+  
+  .button-3d:hover:before {
+    @apply opacity-100;
   }
 }

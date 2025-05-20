@@ -3,8 +3,8 @@ import React from 'react';
 
 interface PageLayoutProps {
   children: React.ReactNode;
-  backgroundImage: 'blue-wave' | 'heartbeat' | 'doctor' | 'medical-tech' | 'ai-health' | 'heart-hand' | 'ai-hand' | 'robot-hand' | 'digital-doctor' | 'robot-human-hand' | 'digital-doctor-blue';
-  secondaryBackgroundImage?: 'blue-wave' | 'heartbeat' | 'doctor' | 'medical-tech' | 'ai-health' | 'heart-hand' | 'ai-hand' | 'robot-hand' | 'digital-doctor' | 'robot-human-hand' | 'digital-doctor-blue';
+  backgroundImage: 'blue-wave' | 'heartbeat' | 'doctor' | 'medical-tech' | 'ai-health' | 'heart-hand' | 'ai-hand' | 'robot-hand' | 'digital-doctor' | 'robot-human-hand' | 'digital-doctor-blue' | 'robot-human-heart' | 'digital-doctor-hologram';
+  secondaryBackgroundImage?: 'blue-wave' | 'heartbeat' | 'doctor' | 'medical-tech' | 'ai-health' | 'heart-hand' | 'ai-hand' | 'robot-hand' | 'digital-doctor' | 'robot-human-hand' | 'digital-doctor-blue' | 'robot-human-heart' | 'digital-doctor-hologram';
   className?: string;
   overlayOpacity?: string;
 }
@@ -55,8 +55,10 @@ function getBackgroundImageUrl(key: string): string {
     'ai-hand': 'ac959dd7-1802-468e-ad99-89d52fce8f88.png',   // Original AI hand
     'robot-hand': 'c9d90c56-bfa3-4073-b4fa-603aa947a533.png', // Robot hand image
     'digital-doctor': '0218ee44-98fd-4765-95b0-e4c9fed62d60.png', // Digital doctor image
-    'robot-human-hand': '6a5c90ab-aa8c-4989-b945-783e5ca14512.png', // New robot-human hand image
-    'digital-doctor-blue': 'b5e237af-3920-4177-b871-596ae11d5d11.png' // New digital doctor blue image
+    'robot-human-hand': '6a5c90ab-aa8c-4989-b945-783e5ca14512.png', // Original robot-human hand image
+    'digital-doctor-blue': 'b5e237af-3920-4177-b871-596ae11d5d11.png', // Original digital doctor blue image
+    'robot-human-heart': '588093dc-dd20-4c3a-9d61-ff1862086164.png', // New robot-human heart image
+    'digital-doctor-hologram': 'f6402c1f-0793-4323-9c36-abec6b19c843.png', // New digital doctor hologram image
   };
   
   return imageMap[key] || 'dda7863b-b790-420a-b1c3-0d52fec05084.png'; // Default to blue wave if not found

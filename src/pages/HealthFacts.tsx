@@ -125,13 +125,16 @@ const HealthFacts = () => {
   };
 
   return (
-    <PageLayout backgroundImage="heartbeat">
+    <PageLayout 
+      backgroundImage="robot-human-heart"
+      overlayOpacity="bg-gradient-to-br from-medicare-darkBlue/10 to-black/10"
+    >
       {/* Header/Navigation */}
-      <header className="w-full py-4 px-6 bg-white/80 backdrop-blur-sm">
+      <header className="w-full py-4 px-6 bg-white/50 backdrop-blur-md border-b border-white/40 shadow-md">
         <div className="container mx-auto flex justify-between items-center">
           <MedicareLogo />
           
-          <Link to="/" className="medicare-button-outline">
+          <Link to="/" className="medicare-button-outline shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200">
             Homepage
           </Link>
         </div>
@@ -139,22 +142,22 @@ const HealthFacts = () => {
 
       {/* Main Content */}
       <div className="container mx-auto px-6 py-12">
-        <div className="medicare-card mb-10 text-center">
-          <h1 className="text-3xl font-bold mb-4">Health Knowledge Center</h1>
-          <p className="text-gray-700 mb-6">
+        <div className="medicare-card mb-10 text-center shadow-xl border border-white/50">
+          <h1 className="text-3xl font-bold mb-4 text-medicare-darkBlue text-shadow-sm">Health Knowledge Center</h1>
+          <p className="text-gray-800 mb-6 font-medium">
             Discover important health facts and prevention tips to help you improve your day-to-day wellbeing
           </p>
           
           {/* Tabs */}
           <div className="flex border-b mb-8 justify-center gap-4">
             <button 
-              className={activeTab === 'facts' ? 'tab-button-active transform hover:scale-105 transition-transform' : 'tab-button transform hover:scale-105 transition-transform'} 
+              className={activeTab === 'facts' ? 'tab-button-active shadow-md transform hover:scale-105 transition-transform' : 'tab-button shadow-sm transform hover:scale-105 transition-transform'} 
               onClick={() => setActiveTab('facts')}
             >
               Health Facts
             </button>
             <button 
-              className={activeTab === 'tips' ? 'tab-button-active transform hover:scale-105 transition-transform' : 'tab-button transform hover:scale-105 transition-transform'} 
+              className={activeTab === 'tips' ? 'tab-button-active shadow-md transform hover:scale-105 transition-transform' : 'tab-button shadow-sm transform hover:scale-105 transition-transform'} 
               onClick={() => setActiveTab('tips')}
             >
               Prevention Tips
@@ -165,33 +168,33 @@ const HealthFacts = () => {
           <div className="max-w-2xl mx-auto">
             {activeTab === 'facts' ? (
               <div className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full mx-auto flex items-center justify-center text-blue-500 text-2xl mb-4 transform hover:scale-110 transition-transform">
+                <div className="w-16 h-16 bg-blue-100 rounded-full mx-auto flex items-center justify-center text-blue-500 text-2xl mb-4 transform hover:scale-110 transition-transform duration-300 shadow-lg">
                   {healthFacts[currentFact].icon}
                 </div>
-                <h2 className="text-xl font-semibold mb-4 text-medicare-darkBlue">{healthFacts[currentFact].title}</h2>
-                <p className="text-gray-700 mb-8">{healthFacts[currentFact].content}</p>
+                <h2 className="text-xl font-semibold mb-4 text-medicare-darkBlue text-shadow-sm">{healthFacts[currentFact].title}</h2>
+                <p className="text-gray-800 mb-8 font-medium">{healthFacts[currentFact].content}</p>
                 <Button 
-                  className="medicare-button mx-auto transform hover:scale-105 transition-transform"
+                  className="medicare-button mx-auto transform hover:scale-105 transition-transform shadow-lg hover:shadow-xl"
                   onClick={handleNextFact}
                 >
                   Next Fact <span className="ml-2">→</span>
                 </Button>
-                <p className="mt-4 text-sm text-gray-500">Fact {currentFact + 1} of {healthFacts.length}</p>
+                <p className="mt-4 text-sm text-gray-600 font-medium">Fact {currentFact + 1} of {healthFacts.length}</p>
               </div>
             ) : (
               <div className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full mx-auto flex items-center justify-center text-blue-500 text-2xl mb-4 transform hover:scale-110 transition-transform">
+                <div className="w-16 h-16 bg-blue-100 rounded-full mx-auto flex items-center justify-center text-blue-500 text-2xl mb-4 transform hover:scale-110 transition-transform duration-300 shadow-lg">
                   {preventionTips[currentTip].icon}
                 </div>
-                <h2 className="text-xl font-semibold mb-4 text-medicare-darkBlue">{preventionTips[currentTip].title}</h2>
-                <p className="text-gray-700 mb-8">{preventionTips[currentTip].content}</p>
+                <h2 className="text-xl font-semibold mb-4 text-medicare-darkBlue text-shadow-sm">{preventionTips[currentTip].title}</h2>
+                <p className="text-gray-800 mb-8 font-medium">{preventionTips[currentTip].content}</p>
                 <Button 
-                  className="medicare-button mx-auto transform hover:scale-105 transition-transform"
+                  className="medicare-button mx-auto transform hover:scale-105 transition-transform shadow-lg hover:shadow-xl"
                   onClick={handleNextTip}
                 >
                   Next Tip <span className="ml-2">→</span>
                 </Button>
-                <p className="mt-4 text-sm text-gray-500">Tip {currentTip + 1} of {preventionTips.length}</p>
+                <p className="mt-4 text-sm text-gray-600 font-medium">Tip {currentTip + 1} of {preventionTips.length}</p>
               </div>
             )}
           </div>
@@ -199,13 +202,13 @@ const HealthFacts = () => {
       </div>
       
       {/* Footer */}
-      <footer className="bg-medicare-darkBlue text-white py-4 mt-auto">
+      <footer className="bg-white/70 backdrop-blur-md py-4 mt-auto border-t border-white/40 shadow-md">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center">
-            <MedicareLogo className="text-white" />
-            <span className="ml-2 text-sm text-white/70">© {new Date().getFullYear()}</span>
+            <MedicareLogo />
+            <span className="ml-2 text-sm text-medicare-darkBlue font-medium">© {new Date().getFullYear()}</span>
           </div>
-          <div className="text-sm text-white/70">
+          <div className="text-sm text-medicare-darkBlue font-medium">
             Your trusted Medicare AI healthcare companion.
           </div>
         </div>
