@@ -17,8 +17,11 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <PageLayout backgroundImage="blue-wave">
-      <header className="w-full py-4 px-6 bg-white/40 backdrop-blur-md">
+    <PageLayout 
+      backgroundImage="robot-hand"
+      overlayOpacity="bg-gradient-to-br from-medicare-darkBlue/15 to-black/15"
+    >
+      <header className="w-full py-4 px-6 bg-white/40 backdrop-blur-md border-b border-white/30">
         <div className="container mx-auto flex justify-between items-center">
           <MedicareLogo />
           

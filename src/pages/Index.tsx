@@ -43,9 +43,13 @@ const Index = () => {
   ];
 
   return (
-    <PageLayout backgroundImage="blue-wave">
+    <PageLayout 
+      backgroundImage="robot-hand" 
+      secondaryBackgroundImage="digital-doctor"
+      overlayOpacity="bg-gradient-to-br from-medicare-darkBlue/10 to-black/10"
+    >
       {/* Header/Navigation */}
-      <header className="w-full py-4 px-6 bg-white/80 backdrop-blur-sm">
+      <header className="w-full py-4 px-6 bg-white/50 backdrop-blur-md border-b border-white/30">
         <div className="container mx-auto flex justify-between items-center">
           <MedicareLogo />
           
@@ -69,8 +73,8 @@ const Index = () => {
 
       {/* Hero Section */}
       <div className="container mx-auto px-6 py-12">
-        <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-md p-8 max-w-3xl mx-auto text-center animate-fade-in-up">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+        <div className="glass-card p-8 max-w-3xl mx-auto text-center animate-fade-in-up">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-shadow-sm">
             Welcome to Your Personal <span className="text-medicare-blue">AI</span> <span className="text-purple-500">Doctor</span>
           </h1>
           <p className="text-gray-700 mb-8 text-lg">
@@ -97,7 +101,7 @@ const Index = () => {
 
       {/* Services Section */}
       <div className="container mx-auto px-6 py-12">
-        <h2 className="text-2xl font-bold text-center mb-8 text-medicare-darkBlue">Our Services</h2>
+        <h2 className="text-2xl font-bold text-center mb-8 text-medicare-darkBlue text-shadow-md">Our Services</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <div 
@@ -114,18 +118,13 @@ const Index = () => {
 
       {/* AI Models Section */}
       <div className="container mx-auto px-6 py-12 mb-12">
-        <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-md p-8">
+        <div className="glass-card p-8">
           <h2 className="text-2xl font-bold text-center mb-8 text-medicare-darkBlue">Powered By Advanced AI</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {aiModels.map((model, index) => (
               <div 
                 key={index} 
-                className="p-6 rounded-lg text-center transform hover:scale-[1.03] transition-transform" 
-                style={{
-                  backgroundColor: index === 0 ? 'rgba(240, 249, 255, 0.8)' : 
-                                index === 1 ? 'rgba(240, 255, 240, 0.8)' : 
-                                'rgba(250, 240, 255, 0.8)'
-                }}
+                className="p-6 rounded-lg text-center transform hover:scale-[1.03] transition-transform bg-white/40 backdrop-blur-sm border border-white/30" 
               >
                 <div className="text-4xl mb-4">{model.icon}</div>
                 <h3 className="text-xl font-semibold mb-2 text-medicare-darkBlue">{model.title}</h3>
@@ -136,14 +135,14 @@ const Index = () => {
         </div>
       </div>
       
-      {/* Footer */}
-      <footer className="bg-medicare-darkBlue text-white py-4 mt-auto">
+      {/* Footer with improved visibility */}
+      <footer className="bg-medicare-darkBlue/90 backdrop-blur-md py-4 mt-auto border-t border-white/30">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center">
             <MedicareLogo className="text-white" />
-            <span className="ml-2 text-sm text-white/70">© {new Date().getFullYear()}</span>
+            <span className="ml-2 text-sm text-white">© {new Date().getFullYear()}</span>
           </div>
-          <div className="text-sm text-white/70">
+          <div className="text-sm text-white">
             Your trusted Medicare AI healthcare companion.
           </div>
         </div>
