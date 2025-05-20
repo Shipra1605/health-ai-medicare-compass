@@ -95,38 +95,50 @@
 }
 
 @layer components {
-  /* Enhanced Glassmorphism Card styles with 3D effect */
+  /* Enhanced Glassmorphism Card styles with stronger 3D effect */
   .medicare-card {
-    @apply bg-white/50 backdrop-blur-md rounded-lg shadow-lg p-6 transition-all duration-300 border border-white/40 hover:shadow-xl;
+    @apply bg-white/60 backdrop-blur-md rounded-lg shadow-lg p-6 transition-all duration-300 
+    border border-white/50 hover:shadow-xl hover:translate-y-[-5px] transform;
   }
   
-  /* Enhanced Glass card effect with more transparency and 3D */
+  /* Enhanced Glass card effect with better depth and 3D */
   .glass-card {
-    @apply bg-white/50 backdrop-blur-md border border-white/40 shadow-lg rounded-lg hover:shadow-xl transition-all duration-300;
+    @apply bg-white/60 backdrop-blur-md border border-white/40 shadow-lg rounded-lg 
+    hover:shadow-xl transition-all duration-300 hover:translate-y-[-3px];
   }
   
-  /* 3D Button styles with enhanced effect */
+  /* Enhanced 3D Button styles with stronger effect */
   .medicare-button {
-    @apply bg-medicare-blue text-white font-medium rounded-md px-4 py-2 hover:bg-medicare-blue/90 transition-all duration-200 
-    shadow-md hover:shadow-lg flex items-center justify-center gap-2 transform hover:scale-105 
-    border border-medicare-blue/20 hover:translate-y-[-2px];
+    @apply bg-medicare-blue text-white font-medium rounded-md px-4 py-2 
+    hover:bg-medicare-blue/90 transition-all duration-300 
+    shadow-md hover:shadow-xl flex items-center justify-center gap-2 transform hover:scale-105 
+    border border-medicare-blue/20 hover:translate-y-[-3px]
+    relative overflow-hidden after:absolute after:inset-0 after:bg-gradient-to-r 
+    after:from-transparent after:via-white/20 after:to-transparent after:opacity-0 
+    hover:after:opacity-100 hover:after:animate-background-shine;
   }
 
   .medicare-button-outline {
     @apply border border-medicare-blue text-medicare-blue font-medium rounded-md px-4 py-2 
-    hover:bg-medicare-blue hover:text-white transition-all duration-200 
+    hover:bg-medicare-blue hover:text-white transition-all duration-300 
     flex items-center justify-center gap-2 transform hover:scale-105
-    shadow-md hover:shadow-lg hover:translate-y-[-2px];
+    shadow-md hover:shadow-xl hover:translate-y-[-3px]
+    relative overflow-hidden after:absolute after:inset-0 after:bg-gradient-to-r 
+    after:from-transparent after:via-white/20 after:to-transparent after:opacity-0 
+    hover:after:opacity-100 hover:after:animate-background-shine;
   }
 
-  /* Input styles with 3D effect */
+  /* Enhanced Input styles with 3D effect */
   .medicare-input {
-    @apply border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-medicare-blue/50 focus:border-medicare-blue/50 bg-white/70 w-full shadow-sm focus:shadow-md transition-all duration-200;
+    @apply border border-gray-300 rounded-md px-3 py-2 focus:outline-none 
+    focus:ring-2 focus:ring-medicare-blue/50 focus:border-medicare-blue/50 
+    bg-white/70 w-full shadow-sm focus:shadow-md transition-all duration-200
+    hover:shadow-md focus:translate-y-[-2px];
   }
 
   /* Header styles with enhanced glassmorphism */
   .header-container {
-    @apply w-full py-3 px-6 bg-white/50 backdrop-blur-md shadow-md border-b border-white/40;
+    @apply w-full py-3 px-6 bg-white/60 backdrop-blur-md shadow-md border-b border-white/40;
   }
 
   /* Section styles */
@@ -134,53 +146,54 @@
     @apply container mx-auto px-4 py-6;
   }
 
-  /* Heading styles with text shadow for better visibility on image backgrounds */
+  /* Enhanced Heading styles with stronger text shadow for better visibility */
   .heading-primary {
-    @apply text-2xl md:text-3xl font-bold text-medicare-darkBlue mb-4 text-shadow-sm;
+    @apply text-2xl md:text-3xl font-bold text-medicare-darkBlue mb-4 text-shadow-md;
   }
 
   .heading-secondary {
-    @apply text-xl md:text-2xl font-semibold text-medicare-darkBlue mb-3 text-shadow-xs;
+    @apply text-xl md:text-2xl font-semibold text-medicare-darkBlue mb-3 text-shadow-sm;
   }
 
-  /* Enhanced Tab styles with 3D effect */
+  /* Enhanced Tab styles with stronger 3D effect */
   .tab-button {
     @apply px-4 py-2 text-gray-600 rounded-t-lg hover:text-medicare-blue transition-colors 
-    transform hover:scale-105 shadow hover:shadow-md hover:translate-y-[-2px] transition-all duration-200;
+    transform hover:scale-105 shadow hover:shadow-md hover:translate-y-[-3px] transition-all duration-200;
   }
 
   .tab-button-active {
-    @apply px-4 py-2 text-medicare-blue bg-white/50 backdrop-blur-md rounded-t-lg 
+    @apply px-4 py-2 text-medicare-blue bg-white/60 backdrop-blur-md rounded-t-lg 
     border-b-2 border-medicare-blue font-medium transform hover:scale-105 
-    shadow-md hover:translate-y-[-2px] transition-all duration-200;
+    shadow-md hover:translate-y-[-3px] transition-all duration-200;
   }
 
   /* Content container with improved glassmorphism */
   .content-container {
-    @apply bg-white/50 backdrop-blur-md rounded-lg shadow-md p-6 mb-6 border border-white/40 hover:shadow-lg transition-all duration-300;
+    @apply bg-white/60 backdrop-blur-md rounded-lg shadow-lg p-6 mb-6 border border-white/40 
+    hover:shadow-xl transition-all duration-300 hover:translate-y-[-3px];
   }
 
-  /* Enhanced 3D and Glass Effects */
+  /* Enhanced 3D Card Effect */
   .card-3d {
-    @apply transition-all duration-300 hover:shadow-xl hover:transform hover:scale-[1.02] hover:-translate-y-1
-    border border-white/40 shadow-md;
+    @apply transition-all duration-300 hover:shadow-xl hover:transform hover:scale-[1.03] 
+    hover:-translate-y-2 border border-white/50 shadow-md;
   }
   
-  /* Text shadow utilities for better text visibility on image backgrounds */
+  /* Enhanced Text shadow utilities for much better text visibility on image backgrounds */
   .text-shadow-sm {
-    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.25);
   }
   
   .text-shadow-md {
-    text-shadow: 0 2px 4px rgba(0,0,0,0.25);
+    text-shadow: 0 2px 6px rgba(0,0,0,0.3);
   }
   
   .text-shadow-lg {
-    text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    text-shadow: 0 4px 9px rgba(0,0,0,0.35);
   }
   
   .text-shadow-xl {
-    text-shadow: 0 8px 16px rgba(0,0,0,0.35);
+    text-shadow: 0 8px 16px rgba(0,0,0,0.4);
   }
   
   .text-shadow-none {
@@ -196,36 +209,36 @@
   }
   
   .text-shadow-xs {
-    text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
   }
   
-  /* Animation Classes */
+  /* Enhanced Animation Classes */
   .animate-fade-in-up {
-    animation: fadeInUp 0.6s ease-out forwards;
+    animation: fadeInUp 0.8s ease-out forwards;
   }
   
   .animate-pulse-subtle {
-    animation: pulseShadow 2s infinite;
+    animation: pulseShadow 3s infinite;
   }
   
   .hover-scale {
-    @apply transition-transform duration-200 hover:scale-105;
+    @apply transition-transform duration-300 hover:scale-105;
   }
   
   .hover-3d {
-    @apply transition-all duration-300 hover:shadow-xl hover:transform hover:scale-[1.03] hover:-translate-y-1;
+    @apply transition-all duration-300 hover:shadow-xl hover:transform hover:scale-[1.03] hover:-translate-y-2;
   }
   
-  /* 3D logo animation */
+  /* Enhanced 3D logo animation */
   .logo-3d {
     @apply transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-xl;
   }
   
-  /* Keyframes */
+  /* Enhanced Keyframes */
   @keyframes fadeInUp {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(25px);
     }
     to {
       opacity: 1;
@@ -235,21 +248,35 @@
   
   @keyframes pulseShadow {
     0%, 100% {
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
     }
     50% {
-      box-shadow: 0 5px 25px rgba(14, 165, 233, 0.3);
+      box-shadow: 0 5px 30px rgba(14, 165, 233, 0.35);
     }
   }
   
-  /* 3D button hover animation */
+  /* Enhanced floating animation for the logo */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+  
+  .animate-float {
+    animation: float 5s ease-in-out infinite;
+  }
+  
+  /* Enhanced 3D button hover animation */
   .button-3d {
     @apply relative overflow-hidden transition-all duration-300 transform hover:translate-y-[-3px] hover:shadow-lg;
   }
   
   .button-3d:before {
     content: "";
-    @apply absolute inset-0 bg-white/10 opacity-0 transition-opacity duration-300;
+    @apply absolute inset-0 bg-white/15 opacity-0 transition-opacity duration-300;
   }
   
   .button-3d:hover:before {

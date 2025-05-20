@@ -3,8 +3,8 @@ import React from 'react';
 
 interface PageLayoutProps {
   children: React.ReactNode;
-  backgroundImage: 'blue-wave' | 'heartbeat' | 'doctor' | 'medical-tech' | 'ai-health' | 'heart-hand' | 'ai-hand' | 'robot-hand' | 'digital-doctor' | 'robot-human-hand' | 'digital-doctor-blue' | 'robot-human-heart' | 'digital-doctor-hologram';
-  secondaryBackgroundImage?: 'blue-wave' | 'heartbeat' | 'doctor' | 'medical-tech' | 'ai-health' | 'heart-hand' | 'ai-hand' | 'robot-hand' | 'digital-doctor' | 'robot-human-hand' | 'digital-doctor-blue' | 'robot-human-heart' | 'digital-doctor-hologram';
+  backgroundImage: 'blue-wave' | 'heartbeat' | 'doctor' | 'medical-tech' | 'ai-health' | 'heart-hand' | 'ai-hand' | 'robot-hand' | 'digital-doctor' | 'robot-human-hand' | 'digital-doctor-blue' | 'robot-human-heart' | 'digital-doctor-hologram' | 'robot-human-chip' | 'digital-doctor-hologram-blue';
+  secondaryBackgroundImage?: 'blue-wave' | 'heartbeat' | 'doctor' | 'medical-tech' | 'ai-health' | 'heart-hand' | 'ai-hand' | 'robot-hand' | 'digital-doctor' | 'robot-human-hand' | 'digital-doctor-blue' | 'robot-human-heart' | 'digital-doctor-hologram' | 'robot-human-chip' | 'digital-doctor-hologram-blue';
   className?: string;
   overlayOpacity?: string;
 }
@@ -57,8 +57,10 @@ function getBackgroundImageUrl(key: string): string {
     'digital-doctor': '0218ee44-98fd-4765-95b0-e4c9fed62d60.png', // Digital doctor image
     'robot-human-hand': '6a5c90ab-aa8c-4989-b945-783e5ca14512.png', // Original robot-human hand image
     'digital-doctor-blue': 'b5e237af-3920-4177-b871-596ae11d5d11.png', // Original digital doctor blue image
-    'robot-human-heart': '588093dc-dd20-4c3a-9d61-ff1862086164.png', // New robot-human heart image
-    'digital-doctor-hologram': 'f6402c1f-0793-4323-9c36-abec6b19c843.png', // New digital doctor hologram image
+    'robot-human-heart': '588093dc-dd20-4c3a-9d61-ff1862086164.png', // Robot-human heart image
+    'digital-doctor-hologram': 'f6402c1f-0793-4323-9c36-abec6b19c843.png', // Digital doctor hologram image
+    'robot-human-chip': '701ee6f9-0977-468b-adde-53d032b29113.png', // New robot-human chip image
+    'digital-doctor-hologram-blue': '392cf178-b017-4347-a3ea-a1e1ea83d9f1.png', // New digital doctor hologram blue image
   };
   
   return imageMap[key] || 'dda7863b-b790-420a-b1c3-0d52fec05084.png'; // Default to blue wave if not found
