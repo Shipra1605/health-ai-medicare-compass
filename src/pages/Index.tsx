@@ -44,12 +44,12 @@ const Index = () => {
 
   return (
     <PageLayout 
-      backgroundImage="robot-hand" 
-      secondaryBackgroundImage="digital-doctor"
+      backgroundImage="robot-human-hand" 
+      secondaryBackgroundImage="digital-doctor-blue"
       overlayOpacity="bg-gradient-to-br from-medicare-darkBlue/10 to-black/10"
     >
       {/* Header/Navigation */}
-      <header className="w-full py-4 px-6 bg-white/50 backdrop-blur-md border-b border-white/30">
+      <header className="w-full py-4 px-6 bg-white/40 backdrop-blur-md border-b border-white/30">
         <div className="container mx-auto flex justify-between items-center">
           <MedicareLogo />
           
@@ -136,13 +136,13 @@ const Index = () => {
       </div>
       
       {/* Footer with improved visibility */}
-      <footer className="bg-medicare-darkBlue/90 backdrop-blur-md py-4 mt-auto border-t border-white/30">
+      <footer className="bg-white/70 backdrop-blur-md py-4 mt-auto border-t border-white/30">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center">
-            <MedicareLogo className="text-white" />
-            <span className="ml-2 text-sm text-white">© {new Date().getFullYear()}</span>
+            <MedicareLogo />
+            <span className="ml-2 text-sm text-medicare-darkBlue">© {new Date().getFullYear()}</span>
           </div>
-          <div className="text-sm text-white">
+          <div className="text-sm text-medicare-darkBlue font-medium">
             Your trusted Medicare AI healthcare companion.
           </div>
         </div>

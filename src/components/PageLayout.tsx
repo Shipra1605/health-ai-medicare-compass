@@ -3,8 +3,8 @@ import React from 'react';
 
 interface PageLayoutProps {
   children: React.ReactNode;
-  backgroundImage: 'blue-wave' | 'heartbeat' | 'doctor' | 'medical-tech' | 'ai-health' | 'heart-hand' | 'ai-hand' | 'robot-hand' | 'digital-doctor';
-  secondaryBackgroundImage?: 'blue-wave' | 'heartbeat' | 'doctor' | 'medical-tech' | 'ai-health' | 'heart-hand' | 'ai-hand' | 'robot-hand' | 'digital-doctor';
+  backgroundImage: 'blue-wave' | 'heartbeat' | 'doctor' | 'medical-tech' | 'ai-health' | 'heart-hand' | 'ai-hand' | 'robot-hand' | 'digital-doctor' | 'robot-human-hand' | 'digital-doctor-blue';
+  secondaryBackgroundImage?: 'blue-wave' | 'heartbeat' | 'doctor' | 'medical-tech' | 'ai-health' | 'heart-hand' | 'ai-hand' | 'robot-hand' | 'digital-doctor' | 'robot-human-hand' | 'digital-doctor-blue';
   className?: string;
   overlayOpacity?: string;
 }
@@ -53,8 +53,10 @@ function getBackgroundImageUrl(key: string): string {
     'ai-health': '659deeb1-7ebb-40bf-b626-6f18cedeb066.png', // Original AI health
     'heart-hand': '7d2262df-ce65-461d-b63d-e76a5a54e91d.png', // Original heart hand
     'ai-hand': 'ac959dd7-1802-468e-ad99-89d52fce8f88.png',   // Original AI hand
-    'robot-hand': 'c9d90c56-bfa3-4073-b4fa-603aa947a533.png', // New robot hand image
-    'digital-doctor': '0218ee44-98fd-4765-95b0-e4c9fed62d60.png' // New digital doctor image
+    'robot-hand': 'c9d90c56-bfa3-4073-b4fa-603aa947a533.png', // Robot hand image
+    'digital-doctor': '0218ee44-98fd-4765-95b0-e4c9fed62d60.png', // Digital doctor image
+    'robot-human-hand': '6a5c90ab-aa8c-4989-b945-783e5ca14512.png', // New robot-human hand image
+    'digital-doctor-blue': 'b5e237af-3920-4177-b871-596ae11d5d11.png' // New digital doctor blue image
   };
   
   return imageMap[key] || 'dda7863b-b790-420a-b1c3-0d52fec05084.png'; // Default to blue wave if not found

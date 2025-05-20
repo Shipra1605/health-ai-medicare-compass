@@ -18,7 +18,7 @@ const NotFound = () => {
 
   return (
     <PageLayout 
-      backgroundImage="robot-hand"
+      backgroundImage="robot-human-hand"
       overlayOpacity="bg-gradient-to-br from-medicare-darkBlue/15 to-black/15"
     >
       <header className="w-full py-4 px-6 bg-white/40 backdrop-blur-md border-b border-white/30">
