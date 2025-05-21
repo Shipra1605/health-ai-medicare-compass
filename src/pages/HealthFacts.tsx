@@ -103,7 +103,7 @@ const HealthFacts = () => {
       content: "Strong social relationships can increase your chances of survival by 50%. Social isolation, on the other hand, poses health risks comparable to smoking 15 cigarettes a day and exceeds the risks of obesity."
     },
     {
-      icon: <Lungs className="text-blue-400" size={24} />,
+      icon: <Stethoscope className="text-blue-400" size={24} />,
       title: "Singing Improves Respiratory Health",
       content: "Regular singing strengthens your diaphragm and increases lung capacity. It also boosts immune function by increasing immunoglobulin A, an antibody that serves as the body's first line of defense against respiratory infections."
     },
@@ -158,7 +158,7 @@ const HealthFacts = () => {
       content: "Regular, gentle movement lubricates joints and strengthens surrounding muscles, reducing stiffness and pain. Low-impact exercises like swimming, cycling, and tai chi are particularly beneficial for those with arthritis or joint issues."
     },
     {
-      icon: <Lungs className="text-cyan-600" size={24} />,
+      icon: <Stethoscope className="text-cyan-600" size={24} />,
       title: "Indoor Plants Improve Air Quality",
       content: "Certain houseplants can remove volatile organic compounds (VOCs) from indoor air. Spider plants, peace lilies, and snake plants are particularly effective at absorbing pollutants and increasing oxygen levels in your home."
     }

@@ -44,7 +44,6 @@ const Login = () => {
           
           // Successfully logged in, navigate to dashboard
           navigate('/dashboard');
-          setIsLoading(false);
           return;
         }
       }
@@ -75,7 +74,7 @@ const Login = () => {
 
       {/* Login Form with better glassmorphism */}
       <div className="container mx-auto px-6 py-12 flex justify-center items-center min-h-[80vh]">
-        <div className="w-full max-w-md bg-white/50 backdrop-blur-md rounded-lg p-8 animate-fade-in-up border border-white/30">
+        <div className="w-full max-w-md bg-white/50 backdrop-blur-md rounded-lg p-8 animate-fade-in-up border border-white/30 shadow-lg">
           <div className="flex justify-center mb-6">
             <MedicareLogo size="large" />
           </div>

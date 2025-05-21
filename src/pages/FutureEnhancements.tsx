@@ -33,13 +33,13 @@ const FutureEnhancements = () => {
   return (
     <PageLayout 
       customBackgroundImage="/lovable-uploads/684f6a55-f9b1-4311-aa21-dc2831ed0877.png"
-      overlayOpacity="bg-gradient-to-br from-blue-900/30 to-black/30"
+      overlayOpacity="bg-gradient-to-br from-blue-900/50 to-black/50"
     >
       {/* Header/Navigation */}
       <header className="w-full py-4 px-6 bg-white/50 backdrop-blur-md border-b border-white/40">
         <div className="container mx-auto flex justify-between items-center">
           <MedicareLogo />
-          <Link to="/" className="medicare-button-outline">
+          <Link to="/" className="medicare-button-outline bg-white/80 hover:bg-white/90">
             Back to Homepage
           </Link>
         </div>
@@ -47,8 +47,8 @@ const FutureEnhancements = () => {
 
       {/* Main Content */}
       <div className="container mx-auto px-6 py-12">
-        <div className="glass-card mb-10 text-center p-8">
-          <h1 className="text-3xl font-bold mb-4 text-white text-shadow-md">Future Enhancements</h1>
+        <div className="glass-card mb-10 text-center p-8 bg-white/20">
+          <h1 className="text-3xl font-bold mb-4 text-white text-shadow-md bg-gradient-to-r from-blue-300 to-blue-500 p-3 inline-block rounded-lg">Future Enhancements</h1>
           <p className="text-white mb-6 font-medium text-shadow-sm max-w-3xl mx-auto">
             Medicare AI is an independently developed project by an MCA student specializing in 
             Artificial Intelligence and Machine Learning. The project reflects a strong commitment 
@@ -61,7 +61,7 @@ const FutureEnhancements = () => {
           {enhancements.map((enhancement, index) => (
             <div 
               key={index}
-              className="bg-white/30 backdrop-blur-lg border border-white/50 rounded-xl p-6 transform hover:scale-[1.01] transition-all duration-300 card-3d"
+              className="bg-white/30 backdrop-blur-lg border border-white/50 rounded-xl p-6 transform hover:scale-[1.01] transition-all duration-300 card-3d shadow-lg"
             >
               <div className="flex justify-center mb-4 transform-gpu" style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}>
                 <div className="p-4 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center transform hover:scale-110 transition-transform duration-300" style={{ transform: 'translateZ(20px)' }}>

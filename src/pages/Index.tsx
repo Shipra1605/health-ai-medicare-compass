@@ -45,7 +45,7 @@ const Index = () => {
   return (
     <PageLayout 
       customBackgroundImage="/lovable-uploads/6251a6b0-4ae5-42ec-8540-2304abd7d797.png"
-      overlayOpacity="bg-gradient-to-br from-medicare-darkBlue/15 to-black/20"
+      overlayOpacity="bg-gradient-to-br from-black/30 to-black/50"
     >
       {/* Header/Navigation */}
       <header className="w-full py-4 px-6 bg-white/40 backdrop-blur-md border-b border-white/40">
@@ -73,10 +73,10 @@ const Index = () => {
       {/* Hero Section */}
       <div className="container mx-auto px-6 py-12">
         <div className="glass-card p-8 max-w-3xl mx-auto text-center animate-fade-in-up border border-white/50">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gradient-hero">
-            Welcome to Your Personal <span className="text-blue-500">AI</span> <span className="text-purple-500">Doctor</span>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent transform hover:scale-105 transition-all duration-300">
+            Welcome to Your Personal AI Doctor
           </h1>
-          <p className="text-gray-800 mb-8 text-lg font-medium">
+          <p className="text-white mb-8 text-lg font-medium">
             Transforming Healthcare with AI: Your Virtual Medical Expert for personalized insights and guidance.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -99,13 +99,13 @@ const Index = () => {
       </div>
 
       {/* Services Section */}
-      <div className="container mx-auto px-6 py-12">
-        <h2 className="text-2xl font-bold text-center mb-8 text-medicare-darkBlue text-shadow-md">Our Services</h2>
+      <div className="container mx-auto px-6 py-12 relative z-10">
+        <h2 className="text-2xl font-bold text-center mb-8 text-white text-shadow-md">Our Services</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <div 
               key={index} 
-              className="bg-white/70 backdrop-blur-md rounded-lg p-6 transition-all duration-300 border border-white/40 hover:translate-y-[-5px] transform hover:bg-white/80"
+              className="bg-white/70 backdrop-blur-md rounded-lg p-6 transition-all duration-300 border border-white/40 hover:translate-y-[-5px] transform hover:bg-white/80 shadow-lg"
             >
               <div className="text-4xl mb-4 transform hover:scale-110 transition-transform duration-300">{service.icon}</div>
               <h3 className="text-xl font-semibold mb-2 text-medicare-darkBlue text-shadow-xs">{service.title}</h3>
@@ -117,13 +117,13 @@ const Index = () => {
 
       {/* AI Models Section */}
       <div className="container mx-auto px-6 py-12 mb-12">
-        <div className="glass-card p-8 border border-white/50">
-          <h2 className="text-2xl font-bold text-center mb-8 text-medicare-darkBlue text-shadow-md">Powered By Advanced AI</h2>
+        <div className="glass-card p-8 border border-white/50 bg-black/30 backdrop-blur-md">
+          <h2 className="text-2xl font-bold text-center mb-8 text-white text-shadow-md">Powered By Advanced AI</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {aiModels.map((model, index) => (
               <div 
                 key={index} 
-                className="p-6 rounded-lg text-center transform hover:scale-[1.03] transition-transform duration-300 bg-white/60 backdrop-blur-sm border border-white/40 hover:translate-y-[-5px]" 
+                className="p-6 rounded-lg text-center transform hover:scale-[1.03] transition-transform duration-300 bg-white/60 backdrop-blur-sm border border-white/40 hover:translate-y-[-5px] shadow-lg" 
               >
                 <div className="text-4xl mb-4 transform hover:scale-110 transition-transform duration-300">{model.icon}</div>
                 <h3 className="text-xl font-semibold mb-2 text-medicare-darkBlue text-shadow-xs">{model.title}</h3>
