@@ -30,13 +30,43 @@ const Signup = () => {
       return;
     }
 
-    // Mock signup - in real app, this would call the backend API
+    // Check if email already exists
+    const existingUser = localStorage.getItem('medicareUser');
+    const tempUser = localStorage.getItem('medicareUserTemp');
+    
+    let emailExists = false;
+    
+    if (existingUser) {
+      const user = JSON.parse(existingUser);
+      if (user.email === email) {
+        emailExists = true;
+      }
+    }
+    
+    if (tempUser && !emailExists) {
+      const user = JSON.parse(tempUser);
+      if (user.email === email) {
+        emailExists = true;
+      }
+    }
+    
+    if (emailExists) {
+      toast({
+        title: "Error",
+        description: "This email is already registered",
+        variant: "destructive"
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    // Mock signup - in a real app, this would call the backend API
     setTimeout(() => {
       // Save user data to localStorage (in a real app, would use JWT)
       localStorage.setItem('medicareUserTemp', JSON.stringify({
         name: name,
         email: email,
-        // No isAuthenticated flag yet - will be set after profile setup
+        password: password, // In a real app, this would be hashed
       }));
       
       toast({
@@ -58,10 +88,7 @@ const Signup = () => {
       <header className="w-full py-4 px-6 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto flex justify-between items-center">
           <MedicareLogo />
-          
-          <Link to="/" className="medicare-button-outline">
-            Homepage
-          </Link>
+          {/* Removed homepage button as requested */}
         </div>
       </header>
 

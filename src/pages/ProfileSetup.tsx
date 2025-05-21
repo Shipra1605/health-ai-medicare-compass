@@ -5,16 +5,24 @@ import PageLayout from '@/components/PageLayout';
 import MedicareLogo from '@/components/MedicareLogo';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const ProfileSetup = () => {
   const [fullName, setFullName] = useState('');
-  const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
   const [height, setHeight] = useState('');
+  const [heightUnit, setHeightUnit] = useState('cm');
   const [weight, setWeight] = useState('');
-  const [medicalConditions, setMedicalConditions] = useState('');
+  const [weightUnit, setWeightUnit] = useState('kg');
+  const [city, setCity] = useState('');
+  const [profileImage, setProfileImage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const navigate = useNavigate();
@@ -32,12 +40,28 @@ const ProfileSetup = () => {
     }
   }, [navigate]);
 
+  const handleProfileImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          const imageUrl = event.target.result as string;
+          setProfileImage(imageUrl);
+        }
+      };
+      
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     // Simple validation
-    if (!fullName || !age || !gender || !height || !weight) {
+    if (!fullName || !gender || !height || !weight || !city) {
       toast({
         title: "Error",
         description: "Please fill in all required fields",
@@ -59,11 +83,11 @@ const ProfileSetup = () => {
           isAuthenticated: true,
           profile: {
             fullName,
-            age,
             gender,
-            height,
-            weight,
-            medicalConditions,
+            height: `${height} ${heightUnit}`,
+            weight: `${weight} ${weightUnit}`,
+            city,
+            profileImage
           }
         }));
         
@@ -91,10 +115,7 @@ const ProfileSetup = () => {
       <header className="w-full py-4 px-6 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto flex justify-between items-center">
           <MedicareLogo />
-          
-          <Link to="/" className="medicare-button-outline">
-            Homepage
-          </Link>
+          {/* Removed homepage button as requested */}
         </div>
       </header>
 
@@ -106,6 +127,37 @@ const ProfileSetup = () => {
             <p className="text-center text-gray-600 mb-6">Tell us a bit more about yourself.</p>
             
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Profile Image Upload */}
+              <div className="flex flex-col items-center mb-4">
+                <div className="w-24 h-24 rounded-full bg-gray-200 mb-2 overflow-hidden relative">
+                  {profileImage ? (
+                    <img 
+                      src={profileImage}
+                      alt="Profile"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                <label className="block">
+                  <span className="medicare-button-outline text-sm py-1 px-3 cursor-pointer">
+                    Upload Picture
+                  </span>
+                  <input
+                    type="file" 
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleProfileImageChange}
+                  />
+                </label>
+              </div>
+              
+              {/* Full Name */}
               <div>
                 <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
                   Full Name
@@ -121,46 +173,11 @@ const ProfileSetup = () => {
                 />
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-1">
-                    Age (Years)
-                  </label>
-                  <Input
-                    type="number"
-                    id="age"
-                    placeholder="30"
-                    className="medicare-input"
-                    value={age}
-                    onChange={(e) => setAge(e.target.value)}
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-1">
-                    Gender
-                  </label>
-                  <select
-                    id="gender"
-                    className="medicare-input"
-                    value={gender}
-                    onChange={(e) => setGender(e.target.value)}
-                    required
-                  >
-                    <option value="" disabled>Select gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                    <option value="prefer-not-to-say">Prefer not to say</option>
-                  </select>
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <div>
+              {/* Height with dropdown for unit */}
+              <div className="grid grid-cols-3 gap-2">
+                <div className="col-span-2">
                   <label htmlFor="height" className="block text-sm font-medium text-gray-700 mb-1">
-                    Height (cm)
+                    Height
                   </label>
                   <Input
                     type="number"
@@ -172,10 +189,27 @@ const ProfileSetup = () => {
                     required
                   />
                 </div>
-                
                 <div>
+                  <label htmlFor="heightUnit" className="block text-sm font-medium text-gray-700 mb-1">
+                    Unit
+                  </label>
+                  <Select value={heightUnit} onValueChange={setHeightUnit}>
+                    <SelectTrigger className="medicare-input">
+                      <SelectValue placeholder="Unit" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="cm">cm</SelectItem>
+                      <SelectItem value="feet">feet</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              
+              {/* Weight with dropdown for unit */}
+              <div className="grid grid-cols-3 gap-2">
+                <div className="col-span-2">
                   <label htmlFor="weight" className="block text-sm font-medium text-gray-700 mb-1">
-                    Weight (kg)
+                    Weight
                   </label>
                   <Input
                     type="number"
@@ -187,18 +221,53 @@ const ProfileSetup = () => {
                     required
                   />
                 </div>
+                <div>
+                  <label htmlFor="weightUnit" className="block text-sm font-medium text-gray-700 mb-1">
+                    Unit
+                  </label>
+                  <Select value={weightUnit} onValueChange={setWeightUnit}>
+                    <SelectTrigger className="medicare-input">
+                      <SelectValue placeholder="Unit" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="kg">kg</SelectItem>
+                      <SelectItem value="pounds">pounds</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
               
+              {/* Gender */}
               <div>
-                <label htmlFor="medicalConditions" className="block text-sm font-medium text-gray-700 mb-1">
-                  Existing Medical Conditions (comma-separated)
+                <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-1">
+                  Gender
                 </label>
-                <Textarea
-                  id="medicalConditions"
-                  placeholder="e.g., Asthma, Diabetes, None"
+                <Select value={gender} onValueChange={setGender}>
+                  <SelectTrigger className="medicare-input">
+                    <SelectValue placeholder="Select gender" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="male">Male</SelectItem>
+                    <SelectItem value="female">Female</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                    <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              {/* City */}
+              <div>
+                <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
+                  City
+                </label>
+                <Input
+                  type="text"
+                  id="city"
+                  placeholder="New York"
                   className="medicare-input"
-                  value={medicalConditions}
-                  onChange={(e) => setMedicalConditions(e.target.value)}
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  required
                 />
               </div>
               
@@ -209,10 +278,6 @@ const ProfileSetup = () => {
               >
                 {isLoading ? "Saving..." : "Save Profile"}
               </Button>
-              
-              <p className="text-center text-xs text-gray-500">
-                You can update this information later from your dashboard.
-              </p>
             </form>
           </div>
         ) : (

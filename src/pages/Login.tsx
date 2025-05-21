@@ -29,72 +29,30 @@ const Login = () => {
       return;
     }
 
-    // Simplified login flow - directly check both temporary and full users
+    // Check for user in localStorage
     setTimeout(() => {
-      // Special test case from our demo credentials
-      if (email === "test@example.com" && password === "password") {
-        const userData = {
-          name: "Test User",
-          email: email,
-          isAuthenticated: true
-        };
-        localStorage.setItem('medicareUser', JSON.stringify(userData));
-        
-        toast({
-          title: "Success",
-          description: "Login successful!",
-          variant: "default"
-        });
-        
-        navigate('/dashboard');
-        return;
-      }
-      
-      // Check for user in localStorage - simplified to improve login flow
-      const tempUserData = localStorage.getItem('medicareUserTemp');
       const userData = localStorage.getItem('medicareUser');
       
-      let foundUser = null;
-      
-      // First check main user storage
       if (userData) {
         const user = JSON.parse(userData);
-        if (user.email === email) {
-          foundUser = user;
+        if (user.email === email && user.password === password) {
+          toast({
+            title: "Success",
+            description: "Login successful!",
+            variant: "default"
+          });
+          
+          navigate('/dashboard');
+          setIsLoading(false);
+          return;
         }
       }
       
-      // Then check temp storage if no user found yet
-      if (!foundUser && tempUserData) {
-        const tempUser = JSON.parse(tempUserData);
-        if (tempUser.email === email) {
-          // Simulate successful login by creating an authenticated user
-          foundUser = {
-            ...tempUser,
-            isAuthenticated: true
-          };
-          // Save as full authenticated user
-          localStorage.setItem('medicareUser', JSON.stringify(foundUser));
-          // Remove temp data
-          localStorage.removeItem('medicareUserTemp');
-        }
-      }
-
-      if (foundUser) {
-        toast({
-          title: "Success",
-          description: "Login successful!",
-          variant: "default"
-        });
-        
-        navigate('/dashboard');
-      } else {
-        toast({
-          title: "Error",
-          description: "Invalid email or password",
-          variant: "destructive"
-        });
-      }
+      toast({
+        title: "Error",
+        description: "Invalid email or password",
+        variant: "destructive"
+      });
       
       setIsLoading(false);
     }, 1000);
@@ -106,10 +64,7 @@ const Login = () => {
       <header className="w-full py-4 px-6 bg-white/40 backdrop-blur-md border-b border-white/30">
         <div className="container mx-auto flex justify-between items-center">
           <MedicareLogo />
-          
-          <Link to="/" className="medicare-button-outline">
-            Homepage
-          </Link>
+          {/* Removed homepage button as requested */}
         </div>
       </header>
 
@@ -166,20 +121,8 @@ const Login = () => {
             </div>
           </form>
           
-          {/* Demo credentials */}
-          <div className="mt-6 pt-4 border-t border-gray-200">
-            <p className="text-sm text-gray-500 text-center mb-1">Demo credentials:</p>
-            <p className="text-sm text-gray-500 text-center">Email: test@example.com / Password: password</p>
-          </div>
-          
-          {/* Add decorative heartbeat image in corner - using Image 2 */}
-          <div className="absolute -bottom-4 -right-4 w-16 h-16 opacity-60">
-            <img 
-              src="/lovable-uploads/c087d4bd-226f-4054-88b9-d8a1f1e60b79.png" 
-              alt="Heartbeat" 
-              className="w-full h-full object-contain"
-            />
-          </div>
+          {/* Demo credentials section removed as requested */}
+          {/* Decorative heartbeat image removed as requested */}
         </div>
       </div>
       

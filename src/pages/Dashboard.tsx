@@ -3,21 +3,224 @@ import { Link, useNavigate } from 'react-router-dom';
 import PageLayout from '@/components/PageLayout';
 import MedicareLogo from '@/components/MedicareLogo';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Progress } from '@/components/ui/progress';
+
+// Symptom dropdown options
+const symptomOptions = [
+  'Fever, Cough',
+  'Headache, Fatigue',
+  'Shortness of breath',
+  'Nausea, Vomiting',
+  'Sore Throat',
+  'Joint Pain, Fatigue',
+  'Chest Pain, Dizziness',
+  'Itching, Redness',
+  'Abdominal Pain, Bloating',
+  'Fatigue, Sadness',
+  'Fever, Muscle Aches',
+  'Cough, Sneezing',
+  'Nausea, Dizziness',
+  'Headache, Blurred Vision',
+  'Stomach Pain, Diarrhea',
+  'Joint Pain, Swelling',
+  'Fever, Sore Throat',
+  'Back Pain, Numbness',
+  'Fatigue, Weakness',
+  'Anxiety, Rapid Heartbeat',
+  'Skin Rash, Itching',
+  'Cough, Fever',
+  'Dizziness, Fatigue',
+  'Headache, Sensitivity',
+  'Abdominal Pain, Bloating O',
+  'Nausea, Cramps',
+  'Chest Pain, Shortness of breath',
+  'Fatigue, Difficulty breathing',
+  'Fever, Chills',
+  'Cough, Shortness of breath',
+  'Muscle Pain, Fatigue',
+  'Anxiety, Palpitations',
+  'Cough, Shortness of breat',
+  'Chest Pain, Shortness',
+  'of breath',
+  ' Anxiety, Rapid Heartbeat',
+  ' Skin Rash, Itching',
+  'Cough, Shortness of brea',
+  'e Itching, Redness',
+  ' Nausea, Vomiting',
+  ' Back Pain, Numbness',
+  ' Fatigue, Weakness',
+  ' Anxiety, Palpitations',
+  'e Joint Pain, Swelling',
+  'e Fatigue, Weakness',
+  'e Cough, Shortness of brea',
+  'e Nausea, Vomiting',
+  'e Back Pain, Numbness',
+  'e Anxiety, Palpitations',
+  'Sore Throat, Cough',
+  'Fatigue, Difficulty',
+  'eathing',
+  'Chest Pain, Shortnessof breath'
+];
+
+// Existing conditions dropdown options
+const conditionOptions = [
+  'Viral Infection',
+  'Stress',
+  'Pollution',
+  'Food Poisoning',
+  'Bacterial Infection',
+  'Rheumatoid Arthritis',
+  'High Blood Pressure',
+  'Allergies',
+  'Poor Diet',
+  'Depression',
+  'Cold Weather',
+  'Motion Sickness',
+  'Smoking',
+  'Migraine Triggers',
+  'Spicy Food',
+  'Autoimmune Response',
+  'Herniated Disc',
+  'Pregnancy',
+  'Anemia',
+  'Obesity',
+  'Osteoarthritis',
+  'Dehydration',
+  'Tension',
+  'vereating            ',
+  'Menstrual Cycle',
+  'Heart Disease',
+  'Hypothyroidism',
+  'Hypothyroidism',
+  'Infection',
+  'COVID-19 Exposure',
+  'Overexertion',
+  'Eye Strain',
+  'Sciatica',
+  'Chronic Fatigue Syndrome',
+  'Physical Exertion',
+  'Rheumatoid Arthriti',
+  'h  COVID-19 Exposure',
+  'Overeating',
+  'th  COVID-19 Exposure',
+  'Rheumatoid Arthrit',
+  'Chronic Fatigue',
+  'Syndrome',
+  ' COVID-19 Exposure',
+  'h COVID-19 Exposure',
+  'Chronic FatigueSyndrome',
+  'Bacterial Infection ',
+  'Anemia              ',
+  'Stress              ',
+  'Obesity             ',
+  'Allergies           ',
+  'Viral Infection     ',
+  'Rheumatoid Arthritis ',
+  'Dehydration         ',
+  'Tension             ',
+  'Overeating          ',
+  'Menstrual Cycle    ',
+  'Heart Disease       ',
+  'Hypothyroidism      ',
+  'Infection           ',
+  'COVID-19 Exposure   ',
+  'Overexertion        ',
+  'Food Poisoning  ',
+  'Eye Strain          '
+];
+
+// Medical conditions dropdown options
+const medicalConditionOptions = [
+  'Common Cold',
+  'Migraine',
+  'Asthma',
+  'Gastroenteritis',
+  'Strep Throat',
+  'Arthritis',
+  'Hypertension',
+  'Allergic Reaction',
+  'Indigestion',
+  'Major Depressive',
+  'Influenza',
+  'Motion Sickness',
+  'Chronic Bronchitis',
+  'Gastritis',
+  'Rheumatoid Arthritis',
+  'Tonsillitis',
+  'Sciatica',
+  'Morning Sickness',
+  'Iron Deficiency',
+  'Panic Disorder',
+  'Sleep Apnea',
+  'Dermatitis',
+  'Respiratory infection',
+  'Heat Exhaustion',
+  'Tension Headache',
+  'Menstrual Cramps',
+  'Coronary ArteryDisease',
+  'Thyroid Disorder',
+  'Pneumonia',
+  'COVID-19',
+  'Muscle Strain',
+  'Vision Fatigue',
+  'Herniated Disc',
+  'Chronic Fatigue Syndrome',
+  'Anxiety Disorder',
+  'Muscle Overuse',
+  's  Arthritis',
+  'Major Depressive Disorder',
+  'Allergic Reacti',
+  'Chronic Fatigue',
+  'Syndrome',
+  ' Arthritis',
+  'RespiratoryInfection',
+  'Coronary Artery',
+  'is  Arthritis',
+  'Respiratory Infection',
+  'Coronary Artery Disease',
+  'Respiratory',
+  'Infection',
+  'Disease',
+  'Strep Throat     ',
+  'Iron Deficiency ',
+  'Panic Disorder  ',
+  'Sleep Apnea     ',
+  'Dermatitis      ',
+  'Respiratory     AntiInfection',
+  'Arthritis     ',
+  'Heat Exhaustion Hydr',
+  'Tension Headache Rel',
+  'Indigestion     Anta',
+  'Menstrual Cramps Pai',
+  'Coronary Artery Disease   ',
+  '      ',
+  'Disease         ',
+  'Pheumonia      ',
+  'COVID-19      ',
+  'Allergic Reaction An',
+  'Muscle Strain  '
+];
 
 const Dashboard = () => {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [symptoms, setSymptoms] = useState('');
-  const [severityLevel, setSeverityLevel] = useState(5);
+  const [selectedGender, setSelectedGender] = useState("");
+  const [selectedSymptom, setSelectedSymptom] = useState("");
+  const [selectedCondition, setSelectedCondition] = useState("");
+  const [selectedMedicalCondition, setSelectedMedicalCondition] = useState("");
   const [recommendations, setRecommendations] = useState<any[]>([]);
   const [showTreatment, setShowTreatment] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [medicalRecords, setMedicalRecords] = useState<any[]>([]);
-  const [profileImage, setProfileImage] = useState<string | null>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -49,12 +252,6 @@ const Dashboard = () => {
       setMedicalRecords(JSON.parse(savedRecords));
     }
     
-    // Load profile image from localStorage (if any)
-    const savedProfileImage = localStorage.getItem('medicareProfileImage');
-    if (savedProfileImage) {
-      setProfileImage(savedProfileImage);
-    }
-    
     setLoading(false);
   }, [navigate, toast]);
 
@@ -68,10 +265,10 @@ const Dashboard = () => {
   };
 
   const handleSymptomAnalysis = () => {
-    if (!symptoms.trim()) {
+    if (!selectedGender || !selectedSymptom || !selectedCondition || !selectedMedicalCondition) {
       toast({
         title: "Error",
-        description: "Please enter your symptoms",
+        description: "Please select all required fields",
         variant: "destructive"
       });
       return;
@@ -81,8 +278,10 @@ const Dashboard = () => {
     // Here we're simulating a response
     setTimeout(() => {
       const newRecommendation = {
-        symptom: symptoms,
-        severity: severityLevel,
+        gender: selectedGender,
+        symptom: selectedSymptom,
+        condition: selectedCondition,
+        medicalCondition: selectedMedicalCondition,
         date: new Date().toLocaleString(),
         id: Date.now()
       };
@@ -91,8 +290,10 @@ const Dashboard = () => {
       setRecommendations(updatedRecommendations);
       localStorage.setItem('medicareRecommendations', JSON.stringify(updatedRecommendations));
       
-      setSymptoms('');
-      setSeverityLevel(5);
+      setSelectedGender("");
+      setSelectedSymptom("");
+      setSelectedCondition("");
+      setSelectedMedicalCondition("");
       setShowTreatment(true);
       
       toast({
@@ -138,23 +339,6 @@ const Dashboard = () => {
     });
   };
 
-  const handleProfileImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      const reader = new FileReader();
-      
-      reader.onload = (event) => {
-        if (event.target?.result) {
-          const imageUrl = event.target.result as string;
-          setProfileImage(imageUrl);
-          localStorage.setItem('medicareProfileImage', imageUrl);
-        }
-      };
-      
-      reader.readAsDataURL(file);
-    }
-  };
-
   const handleDeleteRecord = (id: number) => {
     const updatedRecords = medicalRecords.filter(record => record.id !== id);
     setMedicalRecords(updatedRecords);
@@ -193,8 +377,8 @@ const Dashboard = () => {
 
       {/* Dashboard Content */}
       <div className="container mx-auto px-6 py-8">
-        <h1 className="text-2xl font-bold text-white drop-shadow-md mb-6">
-          Welcome back, {user?.name || 'User'}!
+        <h1 className="text-2xl font-bold text-white drop-shadow-md mb-6 mt-4 text-center md:text-left">
+          Welcome Back, {user?.name || 'User'}!
         </h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -207,13 +391,12 @@ const Dashboard = () => {
                 </svg>
                 <h2 className="text-xl font-semibold text-medicare-darkBlue">Patient Profile</h2>
               </div>
-              <p className="text-gray-600 text-sm mb-6">Your personal health summary.</p>
 
               <div className="flex flex-col items-center mb-6">
                 <div className="w-24 h-24 rounded-full bg-gray-200 mb-4 overflow-hidden relative">
-                  {profileImage ? (
+                  {user?.profile?.profileImage ? (
                     <img 
-                      src={profileImage}
+                      src={user.profile.profileImage}
                       alt={user?.profile?.fullName || user?.name || 'User'}
                       className="w-full h-full object-cover"
                     />
@@ -224,39 +407,24 @@ const Dashboard = () => {
                       </svg>
                     </div>
                   )}
-                  <label className="absolute bottom-0 right-0 bg-medicare-blue text-white rounded-full p-1 cursor-pointer transform hover:scale-110 transition-transform">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    <input 
-                      type="file" 
-                      accept="image/*"
-                      className="hidden"
-                      onChange={handleProfileImageChange}
-                    />
-                  </label>
                 </div>
                 <h3 className="font-semibold text-medicare-darkBlue">{user?.profile?.fullName || user?.name}</h3>
                 <p className="text-gray-600 text-sm">{user?.email}</p>
+                {user?.profile?.city && <p className="text-gray-600 text-sm">{user.profile.city}</p>}
               </div>
 
               <div className="border-t pt-4 grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-xs uppercase text-gray-500">AGE</p>
-                  <p className="font-medium">{user?.profile?.age || 'N/A'} years</p>
-                </div>
                 <div>
                   <p className="text-xs uppercase text-gray-500">GENDER</p>
                   <p className="font-medium">{user?.profile?.gender || 'N/A'}</p>
                 </div>
                 <div>
                   <p className="text-xs uppercase text-gray-500">HEIGHT</p>
-                  <p className="font-medium">{user?.profile?.height || 'N/A'} cm</p>
+                  <p className="font-medium">{user?.profile?.height || 'N/A'}</p>
                 </div>
                 <div>
                   <p className="text-xs uppercase text-gray-500">WEIGHT</p>
-                  <p className="font-medium">{user?.profile?.weight || 'N/A'} kg</p>
+                  <p className="font-medium">{user?.profile?.weight || 'N/A'}</p>
                 </div>
               </div>
             </div>
@@ -275,6 +443,7 @@ const Dashboard = () => {
                   type="file"
                   className="flex-1"
                   onChange={handleFileChange}
+                  accept=".pdf,.doc,.docx"
                 />
                 <Button 
                   className="medicare-button-outline" 
@@ -330,31 +499,82 @@ const Dashboard = () => {
                 </svg>
                 <h2 className="text-xl font-semibold text-medicare-darkBlue">Symptom Analysis</h2>
               </div>
-              <p className="text-gray-600 text-sm mb-4">Please describe your current health symptoms or conditions you're experiencing today.</p>
+              <p className="text-gray-600 text-sm mb-4">Please select from the dropdown menus below to describe your current health condition.</p>
 
-              <Textarea 
-                className="medicare-input mb-4"
-                placeholder="e.g., Persistent cough and mild fever for 2 days, feeling fatigued, occasional headache..."
-                rows={4}
-                value={symptoms}
-                onChange={(e) => setSymptoms(e.target.value)}
-              />
-
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Severity Level: {severityLevel}
-                </label>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs">1</span>
-                  <input
-                    type="range"
-                    min="1"
-                    max="10"
-                    value={severityLevel}
-                    onChange={(e) => setSeverityLevel(parseInt(e.target.value))}
-                    className="w-full"
-                  />
-                  <span className="text-xs">10</span>
+              <div className="space-y-4 mb-6">
+                {/* Gender Dropdown */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Gender
+                  </label>
+                  <Select value={selectedGender} onValueChange={setSelectedGender}>
+                    <SelectTrigger className="medicare-input">
+                      <SelectValue placeholder="Select gender" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="male">Male</SelectItem>
+                      <SelectItem value="female">Female</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                      <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                {/* Current Symptoms Dropdown */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Current Symptoms
+                  </label>
+                  <Select value={selectedSymptom} onValueChange={setSelectedSymptom}>
+                    <SelectTrigger className="medicare-input">
+                      <SelectValue placeholder="Select your symptoms" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {symptomOptions.map((symptom, index) => (
+                        <SelectItem key={index} value={symptom}>
+                          {symptom}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                {/* Existing Conditions Dropdown */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Existing Conditions
+                  </label>
+                  <Select value={selectedCondition} onValueChange={setSelectedCondition}>
+                    <SelectTrigger className="medicare-input">
+                      <SelectValue placeholder="Select existing condition" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {conditionOptions.map((condition, index) => (
+                        <SelectItem key={index} value={condition}>
+                          {condition}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                {/* Existing Medical Conditions Dropdown */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Existing Medical Conditions
+                  </label>
+                  <Select value={selectedMedicalCondition} onValueChange={setSelectedMedicalCondition}>
+                    <SelectTrigger className="medicare-input">
+                      <SelectValue placeholder="Select medical condition" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {medicalConditionOptions.map((condition, index) => (
+                        <SelectItem key={index} value={condition}>
+                          {condition}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
 
@@ -369,44 +589,7 @@ const Dashboard = () => {
               </Button>
             </div>
 
-            {/* Previous Recommendations Section */}
-            <div className="glass-card">
-              <div className="flex items-center gap-2 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <h2 className="text-xl font-semibold text-medicare-darkBlue">Previous Recommendations</h2>
-              </div>
-              <p className="text-gray-600 text-sm mb-4">Review your past AI-generated health advice.</p>
-
-              {recommendations.length > 0 ? (
-                recommendations.map((rec) => (
-                  <div key={rec.id} className="border-b last:border-b-0 py-4 bg-white/40 backdrop-blur-sm px-4 rounded-lg mb-2">
-                    <div className="flex justify-between items-center mb-1">
-                      <p className="font-medium">Symptoms: {rec.symptom}</p>
-                      <button 
-                        className="text-medicare-blue text-sm hover:underline transform hover:scale-105 transition-transform"
-                        onClick={() => handleViewRecommendation(rec.id)}
-                      >
-                        View Details
-                      </button>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <p className="text-sm text-gray-500">{rec.date}</p>
-                      <span className="text-xs text-white bg-blue-500 px-2 py-0.5 rounded-full">
-                        Severity: {rec.severity}/10
-                      </span>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div className="text-center py-4 text-gray-500 bg-white/40 backdrop-blur-sm rounded-lg">
-                  No previous recommendations
-                </div>
-              )}
-            </div>
-
-            {/* Personalized Treatment Section */}
+            {/* Personalized Treatment Plan */}
             <div className="glass-card">
               <div className="flex items-center gap-2 mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -418,8 +601,8 @@ const Dashboard = () => {
               {showTreatment ? (
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-lg font-semibold mb-1">Based on symptoms: {recommendations[0]?.symptom || 'cough'}</h3>
-                    <p className="text-sm text-gray-500">Generated: {recommendations[0]?.date || '5/19/2025, 5:12:50 AM'}</p>
+                    <h3 className="text-lg font-semibold mb-1">Based on symptoms: {recommendations[0]?.symptom || 'Cough, Fever'}</h3>
+                    <p className="text-sm text-gray-500">Generated: {recommendations[0]?.date || new Date().toLocaleString()}</p>
                   </div>
                   
                   <div className="bg-blue-50 p-4 rounded-md">
@@ -451,8 +634,8 @@ const Dashboard = () => {
                     <h4 className="font-semibold mb-2">Key Factors:</h4>
                     <ul className="list-disc list-inside space-y-1 text-gray-700">
                       <li>Symptom severity (weight: 0.45)</li>
-                      <li>Past medical condition (weight: 0.35)</li>
-                      <li>Duration of symptoms (weight: 0.20)</li>
+                      <li>Existing medical condition: {recommendations[0]?.medicalCondition || 'Influenza'} (weight: 0.35)</li>
+                      <li>Existing condition: {recommendations[0]?.condition || 'Viral Infection'} (weight: 0.20)</li>
                     </ul>
                   </div>
                 </div>
@@ -464,8 +647,44 @@ const Dashboard = () => {
                     </svg>
                   </div>
                   <p className="text-gray-600 text-center">
-                    Your personalized treatment insights will appear here after analyzing your symptoms or new medical records.
+                    Your personalized treatment insights will appear here after analyzing your symptoms.
                   </p>
+                </div>
+              )}
+            </div>
+
+            {/* Previous Recommendations Section */}
+            <div className="glass-card">
+              <div className="flex items-center gap-2 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h2 className="text-xl font-semibold text-medicare-darkBlue">Previous Recommendations</h2>
+              </div>
+              <p className="text-gray-600 text-sm mb-4">Review your past AI-generated health advice.</p>
+
+              {recommendations.length > 0 ? (
+                recommendations.map((rec) => (
+                  <div key={rec.id} className="border-b last:border-b-0 py-4 bg-white/40 backdrop-blur-sm px-4 rounded-lg mb-2">
+                    <div className="flex justify-between items-center mb-1">
+                      <p className="font-medium">Symptoms: {rec.symptom}</p>
+                      <button 
+                        className="text-medicare-blue text-sm hover:underline transform hover:scale-105 transition-transform"
+                        onClick={() => handleViewRecommendation(rec.id)}
+                      >
+                        View Details
+                      </button>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">{rec.date}</p>
+                      <p className="text-sm text-gray-500">Condition: {rec.condition}</p>
+                      <p className="text-sm text-gray-500">Medical Condition: {rec.medicalCondition}</p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center py-4 text-gray-500 bg-white/40 backdrop-blur-sm rounded-lg">
+                  No previous recommendations
                 </div>
               )}
             </div>
