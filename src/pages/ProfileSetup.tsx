@@ -112,24 +112,23 @@ const ProfileSetup = () => {
   return (
     <PageLayout backgroundImage="medical-tech">
       {/* Header/Navigation */}
-      <header className="w-full py-4 px-6 bg-white/80 backdrop-blur-sm">
+      <header className="w-full py-4 px-6 bg-white/40 backdrop-blur-md border-b border-white/30">
         <div className="container mx-auto flex justify-between items-center">
-          <MedicareLogo />
-          {/* Removed homepage button as requested */}
+          <MedicareLogo size="large" />
         </div>
       </header>
 
       {/* Profile Setup Form */}
       <div className="container mx-auto px-6 py-12 flex justify-center">
         {!showSuccess ? (
-          <div className="w-full max-w-md bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-8 animate-fade-in-up">
-            <h1 className="text-2xl font-bold text-center text-medicare-darkBlue mb-2">Complete Your Profile</h1>
+          <div className="w-full max-w-md bg-white/40 backdrop-blur-md rounded-lg shadow-lg p-8 animate-fade-in-up border border-white/30">
+            <h1 className="text-2xl font-bold text-center text-medicare-darkBlue mb-2 drop-shadow-md">Complete Your Profile</h1>
             <p className="text-center text-gray-600 mb-6">Tell us a bit more about yourself.</p>
             
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Profile Image Upload */}
-              <div className="flex flex-col items-center mb-4">
-                <div className="w-24 h-24 rounded-full bg-gray-200 mb-2 overflow-hidden relative">
+              <div className="flex flex-col items-center mb-6">
+                <div className="w-28 h-28 rounded-full bg-gray-200 mb-2 overflow-hidden relative shadow-md border-4 border-white/60">
                   {profileImage ? (
                     <img 
                       src={profileImage}
@@ -137,15 +136,15 @@ const ProfileSetup = () => {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-400">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="w-full h-full flex items-center justify-center text-gray-400 bg-gradient-to-br from-blue-50 to-gray-100">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-14 w-14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                       </svg>
                     </div>
                   )}
                 </div>
                 <label className="block">
-                  <span className="medicare-button-outline text-sm py-1 px-3 cursor-pointer">
+                  <span className="medicare-button-outline text-sm py-1 px-3 cursor-pointer shadow-md hover:shadow-lg transition-shadow">
                     Upload Picture
                   </span>
                   <input
@@ -158,7 +157,7 @@ const ProfileSetup = () => {
               </div>
               
               {/* Full Name */}
-              <div>
+              <div className="bg-white/70 rounded-lg p-3">
                 <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
                   Full Name
                 </label>
@@ -175,7 +174,7 @@ const ProfileSetup = () => {
               
               {/* Height with dropdown for unit */}
               <div className="grid grid-cols-3 gap-2">
-                <div className="col-span-2">
+                <div className="col-span-2 bg-white/70 rounded-lg p-3">
                   <label htmlFor="height" className="block text-sm font-medium text-gray-700 mb-1">
                     Height
                   </label>
@@ -189,7 +188,7 @@ const ProfileSetup = () => {
                     required
                   />
                 </div>
-                <div>
+                <div className="bg-white/70 rounded-lg p-3">
                   <label htmlFor="heightUnit" className="block text-sm font-medium text-gray-700 mb-1">
                     Unit
                   </label>
@@ -207,7 +206,7 @@ const ProfileSetup = () => {
               
               {/* Weight with dropdown for unit */}
               <div className="grid grid-cols-3 gap-2">
-                <div className="col-span-2">
+                <div className="col-span-2 bg-white/70 rounded-lg p-3">
                   <label htmlFor="weight" className="block text-sm font-medium text-gray-700 mb-1">
                     Weight
                   </label>
@@ -221,7 +220,7 @@ const ProfileSetup = () => {
                     required
                   />
                 </div>
-                <div>
+                <div className="bg-white/70 rounded-lg p-3">
                   <label htmlFor="weightUnit" className="block text-sm font-medium text-gray-700 mb-1">
                     Unit
                   </label>
@@ -238,7 +237,7 @@ const ProfileSetup = () => {
               </div>
               
               {/* Gender */}
-              <div>
+              <div className="bg-white/70 rounded-lg p-3">
                 <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-1">
                   Gender
                 </label>
@@ -256,7 +255,7 @@ const ProfileSetup = () => {
               </div>
               
               {/* City */}
-              <div>
+              <div className="bg-white/70 rounded-lg p-3">
                 <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
                   City
                 </label>
@@ -273,7 +272,7 @@ const ProfileSetup = () => {
               
               <Button 
                 type="submit"
-                className="w-full medicare-button"
+                className="w-full medicare-button shadow-lg hover:shadow-xl transition-shadow py-6"
                 disabled={isLoading}
               >
                 {isLoading ? "Saving..." : "Save Profile"}
@@ -281,31 +280,31 @@ const ProfileSetup = () => {
             </form>
           </div>
         ) : (
-          <div className="w-full max-w-md bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-8 animate-fade-in-up">
+          <div className="w-full max-w-md bg-white/40 backdrop-blur-md rounded-lg shadow-xl p-8 animate-fade-in-up border border-white/30">
             <div className="flex flex-col items-center justify-center py-8">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-green-500 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-green-500 mb-6 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
               
-              <h2 className="text-2xl font-bold text-center text-medicare-darkBlue mb-4">
+              <h2 className="text-2xl font-bold text-center text-medicare-darkBlue mb-4 drop-shadow-md">
                 Welcome New User! Account Successfully Created
               </h2>
               
-              <p className="text-gray-600 mb-6 text-center">
+              <p className="text-gray-600 mb-8 text-center">
                 Your account has been created successfully and your profile has been saved.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link to="/login">
-                  <Button className="medicare-button w-full sm:w-auto">
+                  <Button className="medicare-button w-full sm:w-auto shadow-md hover:shadow-lg transition-shadow">
                     Login
                   </Button>
                 </Link>
                 
                 <Link to="/">
-                  <Button variant="outline" className="medicare-button-outline w-full sm:w-auto">
+                  <Button variant="outline" className="medicare-button-outline w-full sm:w-auto shadow-md hover:shadow-lg transition-shadow">
                     Back to Homepage
                   </Button>
                 </Link>
@@ -320,9 +319,9 @@ const ProfileSetup = () => {
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center">
             <MedicareLogo className="text-white" />
-            <span className="ml-2 text-sm text-white/70">© {new Date().getFullYear()}</span>
+            <span className="ml-2 text-sm text-white">© {new Date().getFullYear()}</span>
           </div>
-          <div className="text-sm text-white/70">
+          <div className="text-sm text-white">
             Your trusted Medicare AI healthcare companion.
           </div>
         </div>

@@ -71,8 +71,8 @@ const symptomOptions = [
   'Chest Pain, Shortnessof breath'
 ];
 
-// Existing conditions dropdown options
-const conditionOptions = [
+// Allergies dropdown options (previously "Existing conditions")
+const allergyOptions = [
   'Viral Infection',
   'Stress',
   'Pollution',
@@ -213,9 +213,10 @@ const medicalConditionOptions = [
 const Dashboard = () => {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [age, setAge] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
   const [selectedSymptom, setSelectedSymptom] = useState("");
-  const [selectedCondition, setSelectedCondition] = useState("");
+  const [selectedAllergy, setSelectedAllergy] = useState("");
   const [selectedMedicalCondition, setSelectedMedicalCondition] = useState("");
   const [recommendations, setRecommendations] = useState<any[]>([]);
   const [showTreatment, setShowTreatment] = useState(false);
@@ -240,14 +241,15 @@ const Dashboard = () => {
     const parsedUser = JSON.parse(userData);
     setUser(parsedUser);
     
-    // Load saved recommendations from localStorage (if any)
-    const savedRecommendations = localStorage.getItem('medicareRecommendations');
+    // Only load recommendations for this specific user
+    const userEmail = parsedUser.email;
+    const savedRecommendations = localStorage.getItem(`medicareRecommendations_${userEmail}`);
     if (savedRecommendations) {
       setRecommendations(JSON.parse(savedRecommendations));
     }
     
-    // Load saved medical records from localStorage (if any)
-    const savedRecords = localStorage.getItem('medicareMedicalRecords');
+    // Load saved medical records for this specific user
+    const savedRecords = localStorage.getItem(`medicareMedicalRecords_${userEmail}`);
     if (savedRecords) {
       setMedicalRecords(JSON.parse(savedRecords));
     }
@@ -265,10 +267,10 @@ const Dashboard = () => {
   };
 
   const handleSymptomAnalysis = () => {
-    if (!selectedGender || !selectedSymptom || !selectedCondition || !selectedMedicalCondition) {
+    if (!age || !selectedGender || !selectedSymptom || !selectedAllergy || !selectedMedicalCondition) {
       toast({
         title: "Error",
-        description: "Please select all required fields",
+        description: "Please fill in all required fields",
         variant: "destructive"
       });
       return;
@@ -277,10 +279,13 @@ const Dashboard = () => {
     // In a real app, this would be an API call to the ML model
     // Here we're simulating a response
     setTimeout(() => {
+      const userEmail = user.email;
       const newRecommendation = {
+        name: user.profile?.fullName || user.name,
+        age: age,
         gender: selectedGender,
         symptom: selectedSymptom,
-        condition: selectedCondition,
+        allergy: selectedAllergy,
         medicalCondition: selectedMedicalCondition,
         date: new Date().toLocaleString(),
         id: Date.now()
@@ -288,11 +293,14 @@ const Dashboard = () => {
       
       const updatedRecommendations = [newRecommendation, ...recommendations];
       setRecommendations(updatedRecommendations);
-      localStorage.setItem('medicareRecommendations', JSON.stringify(updatedRecommendations));
       
+      // Store recommendations specific to this user
+      localStorage.setItem(`medicareRecommendations_${userEmail}`, JSON.stringify(updatedRecommendations));
+      
+      setAge("");
       setSelectedGender("");
       setSelectedSymptom("");
-      setSelectedCondition("");
+      setSelectedAllergy("");
       setSelectedMedicalCondition("");
       setShowTreatment(true);
       
@@ -321,6 +329,7 @@ const Dashboard = () => {
 
     // In a real app, this would upload the file to the server
     // Here we're just simulating the upload
+    const userEmail = user.email;
     const newRecord = {
       name: selectedFile.name,
       date: new Date().toLocaleDateString(),
@@ -329,7 +338,9 @@ const Dashboard = () => {
     
     const updatedRecords = [newRecord, ...medicalRecords];
     setMedicalRecords(updatedRecords);
-    localStorage.setItem('medicareMedicalRecords', JSON.stringify(updatedRecords));
+    
+    // Store medical records specific to this user
+    localStorage.setItem(`medicareMedicalRecords_${userEmail}`, JSON.stringify(updatedRecords));
     
     setSelectedFile(null);
     
@@ -340,9 +351,10 @@ const Dashboard = () => {
   };
 
   const handleDeleteRecord = (id: number) => {
+    const userEmail = user.email;
     const updatedRecords = medicalRecords.filter(record => record.id !== id);
     setMedicalRecords(updatedRecords);
-    localStorage.setItem('medicareMedicalRecords', JSON.stringify(updatedRecords));
+    localStorage.setItem(`medicareMedicalRecords_${userEmail}`, JSON.stringify(updatedRecords));
     
     toast({
       title: "Record Deleted",
@@ -364,7 +376,7 @@ const Dashboard = () => {
       {/* Header/Navigation - with glassmorphism */}
       <header className="w-full py-4 px-6 bg-white/70 backdrop-blur-md border-b border-white/30">
         <div className="container mx-auto flex justify-between items-center">
-          <MedicareLogo />
+          <MedicareLogo size="large" />
           
           <Button className="medicare-button-outline" onClick={handleLogout}>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -377,23 +389,23 @@ const Dashboard = () => {
 
       {/* Dashboard Content */}
       <div className="container mx-auto px-6 py-8">
-        <h1 className="text-2xl font-bold text-white drop-shadow-md mb-6 mt-4 text-center md:text-left">
+        <h1 className="text-3xl font-bold text-white drop-shadow-lg mb-8 mt-2 text-center md:text-left bg-medicare-darkBlue/60 p-3 rounded-lg border border-white/30 backdrop-blur-sm inline-block">
           Welcome Back, {user?.name || 'User'}!
         </h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Patient Profile Section - with glassmorphism */}
+          {/* Patient Profile Section - with improved glassmorphism */}
           <div>
-            <div className="glass-card mb-6">
-              <div className="flex items-center gap-2 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="glass-card mb-6 p-6">
+              <div className="flex items-center gap-3 mb-5 border-b pb-3 border-white/30">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
                 <h2 className="text-xl font-semibold text-medicare-darkBlue">Patient Profile</h2>
               </div>
 
               <div className="flex flex-col items-center mb-6">
-                <div className="w-24 h-24 rounded-full bg-gray-200 mb-4 overflow-hidden relative">
+                <div className="w-28 h-28 rounded-full bg-gray-200 mb-4 overflow-hidden relative border-4 border-white/50 shadow-lg">
                   {user?.profile?.profileImage ? (
                     <img 
                       src={user.profile.profileImage}
@@ -401,52 +413,55 @@ const Dashboard = () => {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-400">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="w-full h-full flex items-center justify-center text-gray-400 bg-gradient-to-br from-blue-50 to-gray-100">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-14 w-14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                       </svg>
                     </div>
                   )}
                 </div>
-                <h3 className="font-semibold text-medicare-darkBlue">{user?.profile?.fullName || user?.name}</h3>
-                <p className="text-gray-600 text-sm">{user?.email}</p>
-                {user?.profile?.city && <p className="text-gray-600 text-sm">{user.profile.city}</p>}
+                <h3 className="font-semibold text-xl text-medicare-darkBlue">{user?.profile?.fullName || user?.name}</h3>
+                <p className="text-gray-600">{user?.email}</p>
               </div>
 
-              <div className="border-t pt-4 grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-xs uppercase text-gray-500">GENDER</p>
-                  <p className="font-medium">{user?.profile?.gender || 'N/A'}</p>
+              <div className="grid grid-cols-2 gap-4 bg-white/70 rounded-lg p-4 shadow-inner">
+                <div className="p-2 bg-white/70 rounded shadow-sm">
+                  <p className="text-xs uppercase text-gray-500 font-medium">GENDER</p>
+                  <p className="font-medium text-medicare-darkBlue">{user?.profile?.gender || 'N/A'}</p>
                 </div>
-                <div>
-                  <p className="text-xs uppercase text-gray-500">HEIGHT</p>
-                  <p className="font-medium">{user?.profile?.height || 'N/A'}</p>
+                <div className="p-2 bg-white/70 rounded shadow-sm">
+                  <p className="text-xs uppercase text-gray-500 font-medium">HEIGHT</p>
+                  <p className="font-medium text-medicare-darkBlue">{user?.profile?.height || 'N/A'}</p>
                 </div>
-                <div>
-                  <p className="text-xs uppercase text-gray-500">WEIGHT</p>
-                  <p className="font-medium">{user?.profile?.weight || 'N/A'}</p>
+                <div className="p-2 bg-white/70 rounded shadow-sm">
+                  <p className="text-xs uppercase text-gray-500 font-medium">WEIGHT</p>
+                  <p className="font-medium text-medicare-darkBlue">{user?.profile?.weight || 'N/A'}</p>
+                </div>
+                <div className="p-2 bg-white/70 rounded shadow-sm">
+                  <p className="text-xs uppercase text-gray-500 font-medium">CITY</p>
+                  <p className="font-medium text-medicare-darkBlue">{user?.profile?.city || 'N/A'}</p>
                 </div>
               </div>
             </div>
 
-            {/* Medical Records Section - with glassmorphism */}
-            <div className="glass-card">
-              <div className="flex items-center gap-2 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {/* Medical Records Section - with improved glassmorphism */}
+            <div className="glass-card p-6">
+              <div className="flex items-center gap-3 mb-5 border-b pb-3 border-white/30">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
                 <h2 className="text-xl font-semibold text-medicare-darkBlue">Medical Records</h2>
               </div>
 
-              <div className="flex items-center mb-4 space-x-2">
+              <div className="flex items-center mb-4 space-x-2 bg-white/70 p-3 rounded-lg">
                 <Input 
                   type="file"
-                  className="flex-1"
+                  className="flex-1 bg-white"
                   onChange={handleFileChange}
                   accept=".pdf,.doc,.docx"
                 />
                 <Button 
-                  className="medicare-button-outline" 
+                  className="medicare-button" 
                   onClick={handleFileUpload}
                   disabled={!selectedFile}
                 >
@@ -458,20 +473,21 @@ const Dashboard = () => {
               </div>
 
               {medicalRecords.length > 0 ? (
-                <div className="space-y-3">
+                <div className="space-y-3 max-h-64 overflow-auto pr-1">
                   {medicalRecords.map((record) => (
-                    <div key={record.id} className="border rounded-lg p-3 flex items-center justify-between bg-white/70 backdrop-blur-sm">
+                    <div key={record.id} className="border rounded-lg p-3 flex items-center justify-between bg-white/80 backdrop-blur-sm shadow hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                         </svg>
-                        <span>{record.name}</span>
+                        <span className="font-medium">{record.name}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="text-xs text-gray-500">{record.date}</span>
                         <button 
                           className="text-red-500 hover:text-red-700 transform hover:scale-110 transition-transform"
                           onClick={() => handleDeleteRecord(record.id)}
+                          aria-label="Delete record"
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -482,28 +498,57 @@ const Dashboard = () => {
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-4 text-gray-500 bg-white/50 backdrop-blur-sm rounded-lg">
+                <div className="text-center py-4 text-gray-600 bg-white/50 backdrop-blur-sm rounded-lg">
                   No medical records uploaded
                 </div>
               )}
             </div>
           </div>
 
-          {/* Main Content - 2/3 width - with glassmorphism */}
+          {/* Main Content - 2/3 width - with improved glassmorphism */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Symptom Analysis Section */}
-            <div className="glass-card">
-              <div className="flex items-center gap-2 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {/* Symptom Analysis Section - Redesigned as requested */}
+            <div className="glass-card p-6">
+              <div className="flex items-center gap-3 mb-5 border-b pb-3 border-white/30">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
                 <h2 className="text-xl font-semibold text-medicare-darkBlue">Symptom Analysis</h2>
               </div>
-              <p className="text-gray-600 text-sm mb-4">Please select from the dropdown menus below to describe your current health condition.</p>
+              <p className="text-gray-600 mb-6 bg-white/50 p-3 rounded-lg">
+                Please provide your information to receive a personalized health analysis.
+              </p>
 
-              <div className="space-y-4 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                {/* Patient Name - Automatically filled */}
+                <div className="bg-white/80 p-4 rounded-lg shadow-sm">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Patient Name
+                  </label>
+                  <Input
+                    type="text"
+                    value={user?.profile?.fullName || user?.name}
+                    className="medicare-input bg-gray-100"
+                    readOnly
+                  />
+                </div>
+                
+                {/* Age Input - Added as requested */}
+                <div className="bg-white/80 p-4 rounded-lg shadow-sm">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Age
+                  </label>
+                  <Input
+                    type="number"
+                    placeholder="Enter your age"
+                    className="medicare-input"
+                    value={age}
+                    onChange={(e) => setAge(e.target.value)}
+                  />
+                </div>
+
                 {/* Gender Dropdown */}
-                <div>
+                <div className="bg-white/80 p-4 rounded-lg shadow-sm">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Gender
                   </label>
@@ -512,16 +557,14 @@ const Dashboard = () => {
                       <SelectValue placeholder="Select gender" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="male">Male</SelectItem>
-                      <SelectItem value="female">Female</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                      <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                      <SelectItem value="Male">Male</SelectItem>
+                      <SelectItem value="Female">Female</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 
                 {/* Current Symptoms Dropdown */}
-                <div>
+                <div className="bg-white/80 p-4 rounded-lg shadow-sm">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Current Symptoms
                   </label>
@@ -529,7 +572,7 @@ const Dashboard = () => {
                     <SelectTrigger className="medicare-input">
                       <SelectValue placeholder="Select your symptoms" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="h-80">
                       {symptomOptions.map((symptom, index) => (
                         <SelectItem key={index} value={symptom}>
                           {symptom}
@@ -539,17 +582,17 @@ const Dashboard = () => {
                   </Select>
                 </div>
                 
-                {/* Existing Conditions Dropdown */}
-                <div>
+                {/* Allergies Dropdown (renamed from Existing Conditions) */}
+                <div className="bg-white/80 p-4 rounded-lg shadow-sm">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Existing Conditions
+                    Allergies
                   </label>
-                  <Select value={selectedCondition} onValueChange={setSelectedCondition}>
+                  <Select value={selectedAllergy} onValueChange={setSelectedAllergy}>
                     <SelectTrigger className="medicare-input">
-                      <SelectValue placeholder="Select existing condition" />
+                      <SelectValue placeholder="Select allergies" />
                     </SelectTrigger>
-                    <SelectContent>
-                      {conditionOptions.map((condition, index) => (
+                    <SelectContent className="h-80">
+                      {allergyOptions.map((condition, index) => (
                         <SelectItem key={index} value={condition}>
                           {condition}
                         </SelectItem>
@@ -559,7 +602,7 @@ const Dashboard = () => {
                 </div>
                 
                 {/* Existing Medical Conditions Dropdown */}
-                <div>
+                <div className="bg-white/80 p-4 rounded-lg shadow-sm">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Existing Medical Conditions
                   </label>
@@ -567,7 +610,7 @@ const Dashboard = () => {
                     <SelectTrigger className="medicare-input">
                       <SelectValue placeholder="Select medical condition" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="h-80">
                       {medicalConditionOptions.map((condition, index) => (
                         <SelectItem key={index} value={condition}>
                           {condition}
@@ -578,21 +621,23 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              <Button 
-                className="w-full medicare-button"
-                onClick={handleSymptomAnalysis}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-                Analyze My Symptoms
-              </Button>
+              <div className="flex justify-center">
+                <Button 
+                  className="medicare-button w-64 py-6 text-lg shadow-lg hover:shadow-xl transition-shadow transform hover:scale-105"
+                  onClick={handleSymptomAnalysis}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  Analyze My Symptoms
+                </Button>
+              </div>
             </div>
 
             {/* Personalized Treatment Plan */}
-            <div className="glass-card">
-              <div className="flex items-center gap-2 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="glass-card p-6">
+              <div className="flex items-center gap-3 mb-5 border-b pb-3 border-white/30">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
                 <h2 className="text-xl font-semibold text-medicare-darkBlue">Get Your Personalized Medical Treatment</h2>
@@ -600,9 +645,10 @@ const Dashboard = () => {
 
               {showTreatment ? (
                 <div className="space-y-4">
-                  <div>
+                  <div className="bg-white/80 p-4 rounded-lg">
                     <h3 className="text-lg font-semibold mb-1">Based on symptoms: {recommendations[0]?.symptom || 'Cough, Fever'}</h3>
-                    <p className="text-sm text-gray-500">Generated: {recommendations[0]?.date || new Date().toLocaleString()}</p>
+                    <p className="text-sm text-gray-600">Generated: {recommendations[0]?.date || new Date().toLocaleString()}</p>
+                    <p className="text-sm text-gray-600">Patient: {recommendations[0]?.name || user?.name}, Age: {recommendations[0]?.age || '35'}</p>
                   </div>
                   
                   <div className="bg-blue-50 p-4 rounded-md">
@@ -634,15 +680,15 @@ const Dashboard = () => {
                     <h4 className="font-semibold mb-2">Key Factors:</h4>
                     <ul className="list-disc list-inside space-y-1 text-gray-700">
                       <li>Symptom severity (weight: 0.45)</li>
-                      <li>Existing medical condition: {recommendations[0]?.medicalCondition || 'Influenza'} (weight: 0.35)</li>
-                      <li>Existing condition: {recommendations[0]?.condition || 'Viral Infection'} (weight: 0.20)</li>
+                      <li>Medical condition: {recommendations[0]?.medicalCondition || 'Influenza'} (weight: 0.35)</li>
+                      <li>Allergies: {recommendations[0]?.allergy || 'Viral Infection'} (weight: 0.20)</li>
                     </ul>
                   </div>
                 </div>
               ) : (
-                <div className="flex flex-col items-center justify-center py-8">
+                <div className="flex flex-col items-center justify-center py-8 bg-white/50 rounded-lg">
                   <div className="w-16 h-16 rounded-full border-2 border-gray-300 flex items-center justify-center mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
@@ -654,36 +700,39 @@ const Dashboard = () => {
             </div>
 
             {/* Previous Recommendations Section */}
-            <div className="glass-card">
-              <div className="flex items-center gap-2 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="glass-card p-6">
+              <div className="flex items-center gap-3 mb-5 border-b pb-3 border-white/30">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-medicare-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <h2 className="text-xl font-semibold text-medicare-darkBlue">Previous Recommendations</h2>
               </div>
-              <p className="text-gray-600 text-sm mb-4">Review your past AI-generated health advice.</p>
+              <p className="text-gray-600 mb-4 bg-white/50 p-3 rounded-lg">Review your past AI-generated health advice.</p>
 
               {recommendations.length > 0 ? (
-                recommendations.map((rec) => (
-                  <div key={rec.id} className="border-b last:border-b-0 py-4 bg-white/40 backdrop-blur-sm px-4 rounded-lg mb-2">
-                    <div className="flex justify-between items-center mb-1">
-                      <p className="font-medium">Symptoms: {rec.symptom}</p>
-                      <button 
-                        className="text-medicare-blue text-sm hover:underline transform hover:scale-105 transition-transform"
-                        onClick={() => handleViewRecommendation(rec.id)}
-                      >
-                        View Details
-                      </button>
+                <div className="max-h-64 overflow-auto pr-1">
+                  {recommendations.map((rec) => (
+                    <div key={rec.id} className="border-b last:border-b-0 py-4 bg-white/80 backdrop-blur-sm px-4 rounded-lg mb-2 hover:shadow-lg transition-shadow">
+                      <div className="flex justify-between items-center mb-1">
+                        <p className="font-medium">Symptoms: {rec.symptom}</p>
+                        <button 
+                          className="text-medicare-blue text-sm hover:underline transform hover:scale-105 transition-transform"
+                          onClick={() => handleViewRecommendation(rec.id)}
+                        >
+                          View Details
+                        </button>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-500">{rec.date}</p>
+                        <p className="text-sm text-gray-500">Age: {rec.age || 'N/A'}</p>
+                        <p className="text-sm text-gray-500">Allergies: {rec.allergy || rec.condition}</p>
+                        <p className="text-sm text-gray-500">Medical Condition: {rec.medicalCondition}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm text-gray-500">{rec.date}</p>
-                      <p className="text-sm text-gray-500">Condition: {rec.condition}</p>
-                      <p className="text-sm text-gray-500">Medical Condition: {rec.medicalCondition}</p>
-                    </div>
-                  </div>
-                ))
+                  ))}
+                </div>
               ) : (
-                <div className="text-center py-4 text-gray-500 bg-white/40 backdrop-blur-sm rounded-lg">
+                <div className="text-center py-4 text-gray-600 bg-white/50 backdrop-blur-sm rounded-lg">
                   No previous recommendations
                 </div>
               )}
@@ -692,14 +741,14 @@ const Dashboard = () => {
         </div>
       </div>
       
-      {/* Footer - with updated Medicare AI text */}
+      {/* Footer - with more visible text */}
       <footer className="bg-medicare-darkBlue text-white py-4 mt-auto">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center">
             <MedicareLogo className="text-white" />
-            <span className="ml-2 text-sm text-white/70">© {new Date().getFullYear()}</span>
+            <span className="ml-2 text-sm text-white">© {new Date().getFullYear()}</span>
           </div>
-          <div className="text-sm text-white/70">
+          <div className="text-sm text-white">
             Your trusted Medicare AI healthcare companion.
           </div>
         </div>

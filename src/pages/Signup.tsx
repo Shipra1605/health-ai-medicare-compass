@@ -30,10 +30,8 @@ const Signup = () => {
       return;
     }
 
-    // Check if email already exists
+    // Check if email already exists in medicareUser
     const existingUser = localStorage.getItem('medicareUser');
-    const tempUser = localStorage.getItem('medicareUserTemp');
-    
     let emailExists = false;
     
     if (existingUser) {
@@ -43,9 +41,11 @@ const Signup = () => {
       }
     }
     
-    if (tempUser && !emailExists) {
-      const user = JSON.parse(tempUser);
-      if (user.email === email) {
+    // Check if email already exists in medicareUserTemp
+    const existingTempUsers = localStorage.getItem('medicareUserTemp');
+    if (existingTempUsers && !emailExists) {
+      const tempUser = JSON.parse(existingTempUsers);
+      if (tempUser.email === email) {
         emailExists = true;
       }
     }
@@ -85,21 +85,20 @@ const Signup = () => {
   return (
     <PageLayout backgroundImage="medical-tech">
       {/* Header/Navigation */}
-      <header className="w-full py-4 px-6 bg-white/80 backdrop-blur-sm">
+      <header className="w-full py-4 px-6 bg-white/40 backdrop-blur-md border-b border-white/30">
         <div className="container mx-auto flex justify-between items-center">
-          <MedicareLogo />
-          {/* Removed homepage button as requested */}
+          <MedicareLogo size="large" />
         </div>
       </header>
 
       {/* Signup Form */}
       <div className="container mx-auto px-6 py-12 flex justify-center">
-        <div className="w-full max-w-md bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-8 animate-fade-in-up">
+        <div className="w-full max-w-md bg-white/40 backdrop-blur-md rounded-lg shadow-lg p-8 animate-fade-in-up border border-white/30">
           <div className="flex justify-center mb-4">
-            <MedicareLogo />
+            <MedicareLogo size="large" />
           </div>
           
-          <h1 className="text-2xl font-bold text-center text-medicare-darkBlue mb-2">Create Account</h1>
+          <h1 className="text-2xl font-bold text-center text-medicare-darkBlue mb-2 drop-shadow-md">Create Account</h1>
           <p className="text-center text-gray-600 mb-6">Start your journey with MediCare AI.</p>
           
           <form onSubmit={handleSignup} className="space-y-4">
@@ -171,9 +170,9 @@ const Signup = () => {
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center">
             <MedicareLogo className="text-white" />
-            <span className="ml-2 text-sm text-white/70">© {new Date().getFullYear()}</span>
+            <span className="ml-2 text-sm text-white">© {new Date().getFullYear()}</span>
           </div>
-          <div className="text-sm text-white/70">
+          <div className="text-sm text-white">
             Your trusted Medicare AI healthcare companion.
           </div>
         </div>

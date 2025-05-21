@@ -63,8 +63,7 @@ const Login = () => {
       {/* Header/Navigation with improved glassmorphism */}
       <header className="w-full py-4 px-6 bg-white/40 backdrop-blur-md border-b border-white/30">
         <div className="container mx-auto flex justify-between items-center">
-          <MedicareLogo />
-          {/* Removed homepage button as requested */}
+          <MedicareLogo size="large" />
         </div>
       </header>
 
@@ -72,10 +71,10 @@ const Login = () => {
       <div className="container mx-auto px-6 py-12 flex justify-center items-center min-h-[80vh]">
         <div className="w-full max-w-md bg-white/40 backdrop-blur-md rounded-lg shadow-lg p-8 animate-fade-in-up border border-white/30">
           <div className="flex justify-center mb-6">
-            <MedicareLogo />
+            <MedicareLogo size="large" />
           </div>
           
-          <h1 className="text-2xl font-bold text-center text-medicare-darkBlue mb-6">Welcome Back</h1>
+          <h1 className="text-2xl font-bold text-center text-medicare-darkBlue mb-6 drop-shadow-md">Welcome Back</h1>
           
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
@@ -120,9 +119,6 @@ const Login = () => {
               </Link>
             </div>
           </form>
-          
-          {/* Demo credentials section removed as requested */}
-          {/* Decorative heartbeat image removed as requested */}
         </div>
       </div>
       
@@ -131,9 +127,9 @@ const Login = () => {
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center">
             <MedicareLogo className="text-white" />
-            <span className="ml-2 text-sm text-white/70">© {new Date().getFullYear()}</span>
+            <span className="ml-2 text-sm text-white">© {new Date().getFullYear()}</span>
           </div>
-          <div className="text-sm text-white/70">
+          <div className="text-sm text-white">
             Your trusted Medicare AI healthcare companion.
           </div>
         </div>
