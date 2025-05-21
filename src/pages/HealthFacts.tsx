@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageLayout from '@/components/PageLayout';
 import MedicareLogo from '@/components/MedicareLogo';
 import { Button } from '@/components/ui/button';
-import { Heart, Brain, Lungs, Pill, Activity, Award, Footprints, Apple, Coffee } from 'lucide-react';
+import { Heart, Brain, Stethoscope, Pill, Activity, Award, Footprints, Apple, Coffee } from 'lucide-react';
 
 const HealthFacts = () => {
   const [activeTab, setActiveTab] = useState('facts');
@@ -44,7 +43,7 @@ const HealthFacts = () => {
       content: "Prolonged exposure to blue light from digital screens can contribute to digital eye strain and may damage retinal cells. The 20-20-20 rule helps protect your eyes: every 20 minutes, look at something 20 feet away for at least 20 seconds."
     },
     {
-      icon: <Lungs className="text-teal-500" size={24} />,
+      icon: <Stethoscope className="text-teal-500" size={24} />,
       title: "Weight-Bearing Exercise Builds Bone Density",
       content: "Activities like walking, running, and resistance training stimulate bone formation. People who regularly perform weight-bearing exercises have higher bone density and a lower risk of osteoporosis as they age."
     },

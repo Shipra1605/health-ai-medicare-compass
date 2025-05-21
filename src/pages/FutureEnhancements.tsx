@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import MedicareLogo from '@/components/MedicareLogo';
 import PageLayout from '@/components/PageLayout';
 import { Button } from '@/components/ui/button';
-import { MonitorHeart, Brain, Video, BarChart3 } from 'lucide-react';
+import { Heart, Brain, Video, BarChart3 } from 'lucide-react';
 
 const FutureEnhancements = () => {
   const enhancements = [
     {
-      icon: <MonitorHeart size={48} className="text-blue-500" />,
+      icon: <Heart size={48} className="text-blue-500" />,
       title: "Smart Health Monitoring",
       content: "Medicare AI seamlessly integrates with wearable devices to enable real-time tracking of vital health parameters such as blood pressure, heart rate, ECG, blood oxygen levels, glucose levels, sleep quality, and physical activity. Users receive automated alerts for abnormal readings, while historical data is visualized through intuitive graphs and trend analysis, supporting early detection and proactive health management."
     },
