@@ -45,25 +45,25 @@ const Index = () => {
   return (
     <PageLayout 
       backgroundImage="robot-human-chip" 
-      secondaryBackgroundImage="digital-doctor-hologram-blue"
+      customBackgroundImage="/lovable-uploads/fe46db85-1151-4f89-9a3e-ee4470de9d6d.png"
       overlayOpacity="bg-gradient-to-br from-medicare-darkBlue/15 to-black/20"
     >
       {/* Header/Navigation */}
-      <header className="w-full py-4 px-6 bg-white/60 backdrop-blur-md border-b border-white/40 shadow-lg">
+      <header className="w-full py-4 px-6 bg-white/40 backdrop-blur-md border-b border-white/40">
         <div className="container mx-auto flex justify-between items-center">
-          <MedicareLogo />
+          <MedicareLogo size="large" />
           
           <nav className="flex items-center gap-4">
             <Link to="/about" className="text-medicare-darkBlue hover:text-medicare-blue transition-colors font-medium text-shadow-xs">About</Link>
             <Link to="/health-facts" className="text-medicare-darkBlue hover:text-medicare-blue transition-colors font-medium text-shadow-xs">Health Facts</Link>
-            <Link to="/team" className="text-medicare-darkBlue hover:text-medicare-blue transition-colors font-medium text-shadow-xs">Meet the Team</Link>
+            <Link to="/future-enhancements" className="text-medicare-darkBlue hover:text-medicare-blue transition-colors font-medium text-shadow-xs">Future Enhancements</Link>
             <Link to="/login">
-              <Button variant="outline" className="border-medicare-blue text-medicare-blue hover:bg-medicare-blue hover:text-white shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-200 hover:translate-y-[-3px]">
+              <Button variant="outline" className="border-medicare-blue text-medicare-blue hover:bg-medicare-blue hover:text-white transform hover:scale-105 transition-all duration-200 hover:translate-y-[-3px]">
                 Sign In
               </Button>
             </Link>
             <Link to="/signup">
-              <Button className="bg-medicare-blue text-white hover:bg-medicare-blue/90 shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-200 hover:translate-y-[-3px]">
+              <Button className="bg-medicare-blue text-white hover:bg-medicare-blue/90 transform hover:scale-105 transition-all duration-200 hover:translate-y-[-3px]">
                 Sign Up
               </Button>
             </Link>
@@ -73,21 +73,21 @@ const Index = () => {
 
       {/* Hero Section */}
       <div className="container mx-auto px-6 py-12">
-        <div className="glass-card p-8 max-w-3xl mx-auto text-center animate-fade-in-up shadow-2xl border border-white/50 hover:shadow-[0_10px_25px_-5px_rgba(14,165,233,0.3)]">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-shadow-lg text-medicare-darkBlue">
-            Welcome to Your Personal <span className="text-medicare-blue">AI</span> <span className="text-purple-500">Doctor</span>
+        <div className="glass-card p-8 max-w-3xl mx-auto text-center animate-fade-in-up border border-white/50">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gradient-hero">
+            Welcome to Your Personal <span className="text-blue-500">AI</span> <span className="text-purple-500">Doctor</span>
           </h1>
           <p className="text-gray-800 mb-8 text-lg font-medium">
             Transforming Healthcare with AI: Your Virtual Medical Expert for personalized insights and guidance.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link to="/signup" className="w-full sm:w-auto">
-              <Button className="w-full medicare-button transform hover:scale-105 transition-transform shadow-xl hover:shadow-2xl hover:translate-y-[-3px]">
+              <Button className="w-full medicare-button transform hover:scale-105 transition-transform hover:translate-y-[-3px]">
                 Create New Account
               </Button>
             </Link>
             <Link to="/login" className="w-full sm:w-auto">
-              <Button variant="outline" className="w-full medicare-button-outline transform hover:scale-105 transition-transform shadow-xl hover:shadow-2xl hover:translate-y-[-3px]">
+              <Button variant="outline" className="w-full medicare-button-outline transform hover:scale-105 transition-transform hover:translate-y-[-3px]">
                 Existing User Login
               </Button>
             </Link>
@@ -106,7 +106,7 @@ const Index = () => {
           {services.map((service, index) => (
             <div 
               key={index} 
-              className="bg-white/70 backdrop-blur-md rounded-lg shadow-lg p-6 transition-all duration-300 border border-white/40 hover:shadow-xl hover:translate-y-[-5px] transform hover:bg-white/80"
+              className="bg-white/70 backdrop-blur-md rounded-lg p-6 transition-all duration-300 border border-white/40 hover:translate-y-[-5px] transform hover:bg-white/80"
             >
               <div className="text-4xl mb-4 transform hover:scale-110 transition-transform duration-300">{service.icon}</div>
               <h3 className="text-xl font-semibold mb-2 text-medicare-darkBlue text-shadow-xs">{service.title}</h3>
@@ -118,13 +118,13 @@ const Index = () => {
 
       {/* AI Models Section */}
       <div className="container mx-auto px-6 py-12 mb-12">
-        <div className="glass-card p-8 shadow-2xl border border-white/50 hover:shadow-[0_15px_30px_-5px_rgba(14,165,233,0.25)]">
+        <div className="glass-card p-8 border border-white/50">
           <h2 className="text-2xl font-bold text-center mb-8 text-medicare-darkBlue text-shadow-md">Powered By Advanced AI</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {aiModels.map((model, index) => (
               <div 
                 key={index} 
-                className="p-6 rounded-lg text-center transform hover:scale-[1.03] transition-transform duration-300 bg-white/60 backdrop-blur-sm border border-white/40 shadow-lg hover:shadow-xl hover:translate-y-[-5px]" 
+                className="p-6 rounded-lg text-center transform hover:scale-[1.03] transition-transform duration-300 bg-white/60 backdrop-blur-sm border border-white/40 hover:translate-y-[-5px]" 
               >
                 <div className="text-4xl mb-4 transform hover:scale-110 transition-transform duration-300">{model.icon}</div>
                 <h3 className="text-xl font-semibold mb-2 text-medicare-darkBlue text-shadow-xs">{model.title}</h3>
@@ -136,7 +136,7 @@ const Index = () => {
       </div>
       
       {/* Footer with improved visibility */}
-      <footer className="bg-white/80 backdrop-blur-md py-4 mt-auto border-t border-white/40 shadow-lg">
+      <footer className="bg-white/80 backdrop-blur-md py-4 mt-auto border-t border-white/40">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center">
             <MedicareLogo />

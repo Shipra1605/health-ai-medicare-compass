@@ -3,8 +3,9 @@ import React from 'react';
 
 interface PageLayoutProps {
   children: React.ReactNode;
-  backgroundImage: 'blue-wave' | 'heartbeat' | 'doctor' | 'medical-tech' | 'ai-health' | 'heart-hand' | 'ai-hand' | 'robot-hand' | 'digital-doctor' | 'robot-human-hand' | 'digital-doctor-blue' | 'robot-human-heart' | 'digital-doctor-hologram' | 'robot-human-chip' | 'digital-doctor-hologram-blue';
+  backgroundImage?: 'blue-wave' | 'heartbeat' | 'doctor' | 'medical-tech' | 'ai-health' | 'heart-hand' | 'ai-hand' | 'robot-hand' | 'digital-doctor' | 'robot-human-hand' | 'digital-doctor-blue' | 'robot-human-heart' | 'digital-doctor-hologram' | 'robot-human-chip' | 'digital-doctor-hologram-blue';
   secondaryBackgroundImage?: 'blue-wave' | 'heartbeat' | 'doctor' | 'medical-tech' | 'ai-health' | 'heart-hand' | 'ai-hand' | 'robot-hand' | 'digital-doctor' | 'robot-human-hand' | 'digital-doctor-blue' | 'robot-human-heart' | 'digital-doctor-hologram' | 'robot-human-chip' | 'digital-doctor-hologram-blue';
+  customBackgroundImage?: string;
   className?: string;
   overlayOpacity?: string;
 }
@@ -13,6 +14,7 @@ const PageLayout = ({
   children, 
   backgroundImage, 
   secondaryBackgroundImage,
+  customBackgroundImage,
   className = "",
   overlayOpacity = "bg-gradient-to-br from-medicare-darkBlue/5 to-black/5" 
 }: PageLayoutProps) => {
@@ -20,12 +22,17 @@ const PageLayout = ({
     <div className="relative min-h-screen w-full flex flex-col">
       {/* Primary Background Image with proper styling */}
       <div 
-        className="fixed inset-0 w-full h-1/2 bg-cover bg-center bg-no-repeat -z-10"
-        style={{ backgroundImage: `url('/lovable-uploads/${getBackgroundImageUrl(backgroundImage)}')` }}
+        className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat -z-10"
+        style={{ backgroundImage: customBackgroundImage 
+          ? `url('${customBackgroundImage}')` 
+          : backgroundImage 
+            ? `url('/lovable-uploads/${getBackgroundImageUrl(backgroundImage)}')` 
+            : 'linear-gradient(to right, #0f2027, #203a43, #2c5364)' 
+        }}
       ></div>
       
       {/* Secondary Background Image (if provided) */}
-      {secondaryBackgroundImage && (
+      {secondaryBackgroundImage && !customBackgroundImage && (
         <div 
           className="fixed inset-0 top-1/2 w-full h-1/2 bg-cover bg-center bg-no-repeat -z-10"
           style={{ backgroundImage: `url('/lovable-uploads/${getBackgroundImageUrl(secondaryBackgroundImage)}')` }}

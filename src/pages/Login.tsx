@@ -42,6 +42,7 @@ const Login = () => {
             variant: "default"
           });
           
+          // Successfully logged in, navigate to dashboard
           navigate('/dashboard');
           setIsLoading(false);
           return;
@@ -64,17 +65,22 @@ const Login = () => {
       <header className="w-full py-4 px-6 bg-white/40 backdrop-blur-md border-b border-white/30">
         <div className="container mx-auto flex justify-between items-center">
           <MedicareLogo size="large" />
+          <Link to="/">
+            <Button variant="outline" className="medicare-button-outline">
+              Back to Homepage
+            </Button>
+          </Link>
         </div>
       </header>
 
       {/* Login Form with better glassmorphism */}
       <div className="container mx-auto px-6 py-12 flex justify-center items-center min-h-[80vh]">
-        <div className="w-full max-w-md bg-white/40 backdrop-blur-md rounded-lg shadow-lg p-8 animate-fade-in-up border border-white/30">
+        <div className="w-full max-w-md bg-white/50 backdrop-blur-md rounded-lg p-8 animate-fade-in-up border border-white/30">
           <div className="flex justify-center mb-6">
             <MedicareLogo size="large" />
           </div>
           
-          <h1 className="text-2xl font-bold text-center text-medicare-darkBlue mb-6 drop-shadow-md">Welcome Back</h1>
+          <h1 className="text-2xl font-bold text-center text-medicare-darkBlue mb-6">Welcome Back</h1>
           
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
@@ -122,14 +128,14 @@ const Login = () => {
         </div>
       </div>
       
-      {/* Footer with updated Medicare AI text */}
-      <footer className="bg-medicare-darkBlue text-white py-4 mt-auto">
+      {/* Footer with improved visibility */}
+      <footer className="bg-white/70 backdrop-blur-md py-4 mt-auto border-t border-white/40 text-medicare-darkBlue">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center">
-            <MedicareLogo className="text-white" />
-            <span className="ml-2 text-sm text-white">© {new Date().getFullYear()}</span>
+            <MedicareLogo />
+            <span className="ml-2 text-sm font-medium">© {new Date().getFullYear()}</span>
           </div>
-          <div className="text-sm text-white">
+          <div className="text-sm font-semibold">
             Your trusted Medicare AI healthcare companion.
           </div>
         </div>
