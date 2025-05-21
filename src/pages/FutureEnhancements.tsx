@@ -32,7 +32,7 @@ const FutureEnhancements = () => {
 
   return (
     <PageLayout 
-      customBackgroundImage="/lovable-uploads/db74ec0f-63fd-4b25-ad71-5eda9148d30a.png"
+      customBackgroundImage="/lovable-uploads/684f6a55-f9b1-4311-aa21-dc2831ed0877.png"
       overlayOpacity="bg-gradient-to-br from-blue-900/30 to-black/30"
     >
       {/* Header/Navigation */}

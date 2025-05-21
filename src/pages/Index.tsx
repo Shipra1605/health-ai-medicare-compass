@@ -44,8 +44,7 @@ const Index = () => {
 
   return (
     <PageLayout 
-      backgroundImage="robot-human-chip" 
-      customBackgroundImage="/lovable-uploads/fe46db85-1151-4f89-9a3e-ee4470de9d6d.png"
+      customBackgroundImage="/lovable-uploads/6251a6b0-4ae5-42ec-8540-2304abd7d797.png"
       overlayOpacity="bg-gradient-to-br from-medicare-darkBlue/15 to-black/20"
     >
       {/* Header/Navigation */}
