@@ -88,6 +88,11 @@ const Signup = () => {
       <header className="w-full py-4 px-6 bg-white/40 backdrop-blur-md border-b border-white/30">
         <div className="container mx-auto flex justify-between items-center">
           <MedicareLogo size="large" />
+          <Link to="/">
+            <Button variant="outline" className="medicare-button-outline">
+              Back to Homepage
+            </Button>
+          </Link>
         </div>
       </header>
 
